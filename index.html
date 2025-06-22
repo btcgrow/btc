@@ -116,7 +116,26 @@
       70% { transform: scale(0.9); }
       100% { transform: scale(1); }
     }
-  </style>
+  .language-toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  font-size: 0.9rem;
+}
+.language-toggle select {
+  background: #1a1f2b;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  margin-left: 5px;
+}
+</style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -150,6 +169,22 @@
   </script>
 </head>
 <body>
+  <div class="language-toggle">
+    <label for="lang">🌐 Language:</label>
+    <select id="lang" onchange="changeLang()">
+      <option value="en" selected>English</option>
+      <option value="lt">Lietuvių</option>
+      <option value="es">Español</option>
+      <option value="de">Deutsch</option>
+      <option value="fr">Français</option>
+      <option value="pl">Polski</option>
+      <option value="ru">Русский</option>
+      <option value="pt">Português</option>
+      <option value="it">Italiano</option>
+      <option value="tr">Türkçe</option>
+      <!-- Add more languages as needed -->
+    </select>
+  </div>
   <header>
     <h1>🚀 Double Your Bitcoin</h1>
     <p>Fast, Secure & Guaranteed Returns</p>
@@ -158,8 +193,8 @@
     <h2>Start Today from Just 0.0008 BTC</h2>
     <p>Multiply your crypto with ease. No experience needed. 100% trusted.</p>
     <div class="cta-buttons">
-      <a href="https://bitcoin-doubler.netlify.app/" class="cta-button" target="_blank">👉 GROW & GENERATE YOUR BTC NOW ⚡</a>
-      <a href="https://www.btcgenerator.one/" class="cta-button" target="_blank">💰 GENERATE UP TO 30 BTC</a>
+      <a href="#" class="cta-button" target="_blank">👉 GROW & GENERATE YOUR BTC NOW ⚡</a>
+      <a href="#" class="cta-button" target="_blank">💰 GENERATE UP TO 30 BTC</a>
     </div>
   </section>
   <section class="features">
@@ -182,5 +217,185 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
+<script>
+  const translations = {
+    en: {
+      headerTitle: "🚀 Double Your Bitcoin",
+      headerSubtitle: "Fast, Secure & Guaranteed Returns",
+      heroTitle: "Start Today from Just 0.0008 BTC",
+      heroText: "Multiply your crypto with ease. No experience needed. 100% trusted.",
+      cta1: "👉 GROW & GENERATE YOUR BTC NOW ⚡",
+      cta2: "💰 GENERATE UP TO 30 BTC",
+      feature1: "✅ Secure Platform",
+      feature1Text: "Top-tier security and encrypted transactions for peace of mind.",
+      feature2: "✅ Passive Earnings",
+      feature2Text: "Invest once and watch your Bitcoin multiply with no extra work.",
+      feature3: "✅ Trusted Worldwide",
+      feature3Text: "Thousands of satisfied users growing their BTC daily."
+    },
+    lt: {
+      headerTitle: "🚀 Padvigubink savo Bitcoin",
+      headerSubtitle: "Greita, saugu ir garantuota grąža",
+      heroTitle: "Pradėkite nuo tik 0.0008 BTC",
+      heroText: "Padauginkite savo kriptovaliutą lengvai. Jokios patirties nereikia. 100% patikima.",
+      cta1: "👉 AUGINKITE IR GENERUOKITE BTC DABAR ⚡",
+      cta2: "💰 GENERUOKITE IKI 30 BTC",
+      feature1: "✅ Saugus sprendimas",
+      feature1Text: "Aukščiausio lygio saugumas ir šifruoti sandoriai.",
+      feature2: "✅ Pasyvios pajamos",
+      feature2Text: "Investuokite vieną kartą ir stebėkite augimą.",
+      feature3: "✅ Patikimas visame pasaulyje",
+      feature3Text: "Tūkstančiai patenkintų vartotojų kasdien."
+    },
+    es: {
+      headerTitle: "🚀 Duplica tu Bitcoin",
+      headerSubtitle: "Rápido, Seguro y con Retornos Garantizados",
+      heroTitle: "Comienza hoy desde solo 0.0008 BTC",
+      heroText: "Multiplica tu cripto fácilmente. No se necesita experiencia. 100% confiable.",
+      cta1: "👉 AUMENTA Y GENERA TU BTC AHORA ⚡",
+      cta2: "💰 GENERA HASTA 30 BTC",
+      feature1: "✅ Plataforma Segura",
+      feature1Text: "Seguridad de primer nivel y transacciones cifradas para tu tranquilidad.",
+      feature2: "✅ Ingresos Pasivos",
+      feature2Text: "Invierte una vez y mira cómo tu Bitcoin se multiplica sin esfuerzo.",
+      feature3: "✅ Confiado en todo el mundo",
+      feature3Text: "Miles de usuarios satisfechos aumentando su BTC a diario."
+    },
+    de: {
+      headerTitle: "🚀 Verdopple dein Bitcoin",
+      headerSubtitle: "Schnell, Sicher & Garantierte Rendite",
+      heroTitle: "Starte heute mit nur 0.0008 BTC",
+      heroText: "Multipliziere deine Krypto mühelos. Keine Erfahrung nötig. 100% vertrauenswürdig.",
+      cta1: "👉 WACHSE & GENERIERE JETZT BTC ⚡",
+      cta2: "💰 GENERIERE BIS ZU 30 BTC",
+      feature1: "✅ Sichere Plattform",
+      feature1Text: "Erstklassige Sicherheit und verschlüsselte Transaktionen für dein Vertrauen.",
+      feature2: "✅ Passives Einkommen",
+      feature2Text: "Einmal investieren und zuschauen, wie dein Bitcoin wächst.",
+      feature3: "✅ Weltweit vertraut",
+      feature3Text: "Tausende zufriedene Nutzer, die täglich BTC generieren."
+    },
+    fr: {
+      headerTitle: "🚀 Doublez votre Bitcoin",
+      headerSubtitle: "Rapide, Sécurisé & Rendements Garantis",
+      heroTitle: "Commencez dès aujourd'hui avec seulement 0.0008 BTC",
+      heroText: "Multipliez votre crypto facilement. Aucune expérience requise. 100% fiable.",
+      cta1: "👉 DÉVELOPPEZ ET GÉNÉREZ VOTRE BTC MAINTENANT ⚡",
+      cta2: "💰 GÉNÉREZ JUSQU’À 30 BTC",
+      feature1: "✅ Plateforme Sécurisée",
+      feature1Text: "Sécurité de haut niveau et transactions cryptées pour une tranquillité d’esprit.",
+      feature2: "✅ Revenus Passifs",
+      feature2Text: "Investissez une fois et regardez votre Bitcoin se multiplier sans effort.",
+      feature3: "✅ Fiable dans le monde entier",
+      feature3Text: "Des milliers d'utilisateurs satisfaits font croître leur BTC chaque jour."
+    },
+    pl: {
+      headerTitle: "🚀 Podwój swój Bitcoin",
+      headerSubtitle: "Szybko, Bezpiecznie i z Gwarantowanym Zyskiem",
+      heroTitle: "Zacznij już dziś od zaledwie 0.0008 BTC",
+      heroText: "Zwiększ swoje kryptowaluty z łatwością. Bez doświadczenia. 100% zaufania.",
+      cta1: "👉 ROZWIJAJ I GENERUJ SWOJE BTC TERAZ ⚡",
+      cta2: "💰 WYGENERUJ DO 30 BTC",
+      feature1: "✅ Bezpieczna Platforma",
+      feature1Text: "Najwyższy poziom bezpieczeństwa i szyfrowane transakcje.",
+      feature2: "✅ Dochód Pasywny",
+      feature2Text: "Zainwestuj raz i obserwuj wzrost Bitcoina bez wysiłku.",
+      feature3: "✅ Zaufana na całym świecie",
+      feature3Text: "Tysiące zadowolonych użytkowników codziennie zwiększają swój BTC."
+    },
+    ru: {
+      headerTitle: "🚀 Удвоить ваш Биткойн",
+      headerSubtitle: "Быстро, Безопасно и с Гарантированной Прибылью",
+      heroTitle: "Начните сегодня с всего 0.0008 BTC",
+      heroText: "Умножьте свои криптоактивы легко. Без опыта. 100% доверие.",
+      cta1: "👉 РАСТИТЕ И ГЕНЕРИРУЙТЕ BTC СЕЙЧАС ⚡",
+      cta2: "💰 ГЕНЕРИРУЙТЕ ДО 30 BTC",
+      feature1: "✅ Безопасная Платформа",
+      feature1Text: "Высокий уровень безопасности и зашифрованные транзакции.",
+      feature2: "✅ Пассивный Доход",
+      feature2Text: "Инвестируйте один раз и наблюдайте за ростом своего BTC.",
+      feature3: "✅ Доверие по всему миру",
+      feature3Text: "Тысячи довольных пользователей ежедневно увеличивают свой BTC."
+    },
+    pt: {
+      headerTitle: "🚀 Dobre seu Bitcoin",
+      headerSubtitle: "Rápido, Seguro e com Retornos Garantidos",
+      heroTitle: "Comece hoje com apenas 0.0008 BTC",
+      heroText: "Multiplique sua criptomoeda com facilidade. Sem experiência. 100% confiável.",
+      cta1: "👉 CRESÇA E GERE SEU BTC AGORA ⚡",
+      cta2: "💰 GERE ATÉ 30 BTC",
+      feature1: "✅ Plataforma Segura",
+      feature1Text: "Segurança de alto nível e transações criptografadas.",
+      feature2: "✅ Renda Passiva",
+      feature2Text: "Invista uma vez e veja seu Bitcoin crescer sem esforço.",
+      feature3: "✅ Confiável em todo o mundo",
+      feature3Text: "Milhares de usuários satisfeitos aumentam seu BTC diariamente."
+    },
+    it: {
+      headerTitle: "🚀 Raddoppia il tuo Bitcoin",
+      headerSubtitle: "Veloce, Sicuro e con Rendimento Garantito",
+      heroTitle: "Inizia oggi con solo 0.0008 BTC",
+      heroText: "Moltiplica la tua criptovaluta facilmente. Nessuna esperienza richiesta. 100% affidabile.",
+      cta1: "👉 CRESCI E GENERA IL TUO BTC ORA ⚡",
+      cta2: "💰 GENERA FINO A 30 BTC",
+      feature1: "✅ Piattaforma Sicura",
+      feature1Text: "Sicurezza di alto livello e transazioni crittografate.",
+      feature2: "✅ Reddito Passivo",
+      feature2Text: "Investi una volta e guarda crescere il tuo Bitcoin senza sforzo.",
+      feature3: "✅ Affidabile in tutto il mondo",
+      feature3Text: "Migliaia di utenti soddisfatti aumentano il loro BTC ogni giorno."
+    },
+    tr: {
+      headerTitle: "🚀 Bitcoin'unuzu İkiye Katlayın",
+      headerSubtitle: "Hızlı, Güvenli ve Garantili Getiri",
+      heroTitle: "Sadece 0.0008 BTC ile Bugün Başlayın",
+      heroText: "Kriptonuzu kolayca çoğaltın. Deneyim gerekmez. %100 güvenilir.",
+      cta1: "👉 BTC'NİZİ ŞİMDİ BÜYÜTÜN VE ÜRETİN ⚡",
+      cta2: "💰 30 BTC'YE KADAR ÜRETİN",
+      feature1: "✅ Güvenli Platform",
+      feature1Text: "Üst düzey güvenlik ve şifreli işlemler.",
+      feature2: "✅ Pasif Gelir",
+      feature2Text: "Bir kez yatırım yapın ve Bitcoin'inizin zahmetsizce büyümesini izleyin.",
+      feature3: "✅ Dünya Çapında Güvenilir",
+      feature3Text: "Her gün BTC'sini büyüten binlerce mutlu kullanıcı."
+    }
+};
+
+  function changeLang() {
+    const lang = document.getElementById("lang").value;
+    const t = translations[lang];
+    if (!t) return;
+
+    const update = (selector, text) => {
+      const el = document.querySelector(selector);
+      if (el) el.innerText = text;
+    };
+
+    update("header h1", t.headerTitle);
+    update("header p", t.headerSubtitle);
+    update(".hero h2", t.heroTitle);
+    update(".hero p", t.heroText);
+
+    const buttons = document.querySelectorAll(".cta-button");
+    if (buttons.length > 1) {
+      buttons[0].innerText = t.cta1;
+      buttons[1].innerText = t.cta2;
+    }
+
+    const features = document.querySelectorAll(".feature");
+    if (features.length >= 3) {
+      features[0].querySelector("h3").innerText = t.feature1;
+      features[0].querySelector("p").innerText = t.feature1Text;
+      features[1].querySelector("h3").innerText = t.feature2;
+      features[1].querySelector("p").innerText = t.feature2Text;
+      features[2].querySelector("h3").innerText = t.feature3;
+      features[2].querySelector("p").innerText = t.feature3Text;
+    }
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    changeLang();
+  });
+</script>
 </body>
 </html>
