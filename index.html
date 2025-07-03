@@ -47,16 +47,16 @@
     header h1 { font-size: 2.5rem; color: #ffc107; }
     header p { font-size: 1rem; margin-top: 10px; color: #ccc; }
 
-    /* Kalbų pasirinkimo konteineris centravimui */
+    /* Kalbų pasirinkimo konteineris */
     .language-selector-container {
       text-align: center;
       margin: 20px 0;
     }
 
-    /* Kalbų select stilius pritaikytas pagal dizainą */
+    /* Kalbų select stilius */
     #language-selector {
-      background-color: #1a1f2b;       /* tamsus fonas */
-      color: #ffc107;                  /* geltona spalva */
+      background-color: #1a1f2b;
+      color: #ffc107;
       border: 2px solid #ffc107;
       border-radius: 8px;
       padding: 10px 16px;
@@ -85,12 +85,35 @@
 
     .hero {
       background: url('https://chat.openai.com/mnt/data/A_promotional_digital_graphic_advertisement_featur.png') no-repeat center center/cover;
-      padding: 80px 20px;
+      padding: 80px 20px 60px;
       text-align: center;
       animation: fadeInUp 1.2s ease-out;
+      position: relative;
     }
-    .hero h2 { font-size: 1.8rem; margin-bottom: 20px; }
+    .hero h2 { font-size: 1.8rem; margin-bottom: 10px; }
     .hero p { font-size: 1rem; margin-bottom: 30px; padding: 0 10px; }
+
+    /* BTC ir EUR kainos blokas */
+    #price-container {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #00ff99;
+      margin: 0 auto 30px;
+      text-align: center;
+      text-shadow: 0 0 8px #00ff99cc;
+      user-select: none;
+    }
+    #price-container span {
+      display: inline-block;
+      margin: 0 12px;
+      min-width: 140px;
+    }
+    #price-container span label {
+      font-weight: 600;
+      color: #ffc107;
+      margin-right: 6px;
+    }
+
     .cta-buttons {
       display: flex;
       flex-direction: column;
@@ -111,6 +134,7 @@
       animation: bounceIn 1s ease forwards;
     }
     .cta-button:hover { background-color: #e0a800; transform: scale(1.05); }
+
     .features {
       display: flex;
       flex-direction: column;
@@ -136,6 +160,32 @@
     .feature:hover { transform: translateY(-5px); }
     .feature h3 { color: #ffc107; margin-bottom: 10px; }
     .feature p { color: #aaa; font-size: 0.95rem; }
+    /* Naujas papildomas tekstas features po pagrindiniu aprašymais */
+    .feature .extra-text {
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: #bbb;
+      line-height: 1.4;
+    }
+
+    /* Naujos papildomos turinio sekcijos stilius */
+    .additional-content {
+      max-width: 900px;
+      margin: 0 auto 40px;
+      padding: 40px 20px;
+      color: #ccc;
+      animation: fadeIn 1.5s ease-in;
+    }
+    .additional-content h2 {
+      color: #ffc107;
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+    }
+    .additional-content p {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
     footer {
       background-color: #0b0f1a;
       text-align: center;
@@ -210,7 +260,13 @@
 
   <section class="hero">
     <h2>Start Today from Just 0.0008 BTC</h2>
-    <div id="btc-price" style="margin: 15px auto 10px; font-size: 1.1rem; color: #00ff99;"></div>
+
+    <!-- Gyva BTC ir EUR kaina -->
+    <div id="price-container" aria-live="polite" aria-atomic="true" aria-label="Live Bitcoin price in USD and Euro">
+      <span><label>BTC/USD:</label> <span id="btc-usd-price">Loading...</span></span>
+      <span><label>BTC/EUR:</label> <span id="btc-eur-price">Loading...</span></span>
+    </div>
+
     <p>Multiply your crypto with ease. No experience needed. 100% trusted.</p>
     <div class="cta-buttons">
       <a href="https://bitcoin-doubler.netlify.app/" class="cta-button" target="_blank">👉 GROW & GENERATE YOUR BTC NOW ⚡</a>
@@ -218,19 +274,34 @@
     </div>
   </section>
 
+  <!-- Naujas papildomas turinys po hero -->
+  <section class="additional-content">
+    <h2 id="additional-title-1"></h2>
+    <p id="additional-desc-1"></p>
+  </section>
+
   <section class="features">
     <div class="feature">
       <h3>✅ Secure Platform</h3>
       <p>Top-tier security and encrypted transactions for peace of mind.</p>
+      <p class="extra-text" id="feature-extra-1"></p>
     </div>
     <div class="feature">
       <h3>✅ Passive Earnings</h3>
       <p>Invest once and watch your Bitcoin multiply with no extra work.</p>
+      <p class="extra-text" id="feature-extra-2"></p>
     </div>
     <div class="feature">
       <h3>✅ Trusted Worldwide</h3>
       <p>Thousands of satisfied users growing their BTC daily.</p>
+      <p class="extra-text" id="feature-extra-3"></p>
     </div>
+  </section>
+
+  <!-- Naujas papildomas turinys po features -->
+  <section class="additional-content" style="background-color: #10141e;">
+    <h2 id="additional-title-2"></h2>
+    <p id="additional-desc-2"></p>
   </section>
 
   <footer>
@@ -243,6 +314,26 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
+    // BTC ir EUR kainos atnaujinimas iš CoinGecko API (nereikalauja API rakto)
+    async function fetchPrices() {
+      try {
+        const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,eur');
+        const data = await response.json();
+        const btcUsd = data.bitcoin.usd.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        const btcEur = data.bitcoin.eur.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        document.getElementById('btc-usd-price').textContent = `$${btcUsd}`;
+        document.getElementById('btc-eur-price').textContent = `€${btcEur}`;
+      } catch (error) {
+        document.getElementById('btc-usd-price').textContent = 'Error';
+        document.getElementById('btc-eur-price').textContent = 'Error';
+        console.error('Failed to fetch BTC prices:', error);
+      }
+    }
+
+    fetchPrices();
+    // Kas 60 sekundžių atnaujina kainas
+    setInterval(fetchPrices, 60000);
+
     const translations = {
       en: {
         header_title: "🚀 Double Your Bitcoin",
@@ -253,11 +344,18 @@
         cta_2: "💰 GENERATE UP TO 30 BTC",
         feature_secure_title: "✅ Secure Platform",
         feature_secure_desc: "Top-tier security and encrypted transactions for peace of mind.",
+        feature_extra_1: "Our advanced encryption technology protects your assets 24/7.",
         feature_passive_title: "✅ Passive Earnings",
         feature_passive_desc: "Invest once and watch your Bitcoin multiply with no extra work.",
+        feature_extra_2: "Enjoy consistent passive income while you focus on what matters.",
         feature_trusted_title: "✅ Trusted Worldwide",
         feature_trusted_desc: "Thousands of satisfied users growing their BTC daily.",
-        footer_text: "© {year} BTCGrow. All rights reserved."
+        feature_extra_3: "Join a global community of investors who trust BTCGrow.",
+        footer_text: "© {year} BTCGrow. All rights reserved.",
+        additional_title_1: "Why Choose BTCGrow?",
+        additional_desc_1: "BTCGrow offers a secure and user-friendly platform to help you multiply your Bitcoin effortlessly. Our advanced technology and dedicated support ensure your investments grow steadily.",
+        additional_title_2: "How It Works",
+        additional_desc_2: "Simply invest your Bitcoin starting from 0.0008 BTC, and watch our system work 24/7 to generate profits. Transparent tracking and quick withdrawals make BTCGrow your trusted crypto partner."
       },
       lt: {
         header_title: "🚀 Padvigubinkite savo Bitcoin",
@@ -266,202 +364,255 @@
         hero_description: "Lengvai padauginkite savo kriptovaliutą. Patirties nereikia. 100% patikima.",
         cta_1: "👉 AUGINKITE IR GENERUOKITE SAVO BTC DABAR ⚡",
         cta_2: "💰 GENERUOKITE IKI 30 BTC",
-        feature_secure_title: "✅ Saugioji platforma",
-        feature_secure_desc: "Aukščiausio lygio saugumas ir užšifruotos transakcijos ramybei.",
-        feature_passive_title: "✅ Pasyvių pajamų šaltinis",
-        feature_passive_desc: "Investuokite vieną kartą ir stebėkite, kaip jūsų Bitcoin auga be papildomo darbo.",
-        feature_trusted_title: "✅ Patikima visame pasaulyje",
+        feature_secure_title: "✅ Saugoma platforma",
+        feature_secure_desc: "Aukščiausio lygio saugumas ir užšifruotos operacijos jūsų ramybei.",
+        feature_extra_1: "Mūsų pažangi šifravimo technologija saugo jūsų turtą visą parą.",
+        feature_passive_title: "✅ Pasyvios pajamos",
+        feature_passive_desc: "Investuokite vieną kartą ir stebėkite, kaip jūsų Bitcoin daugėja be papildomo darbo.",
+        feature_extra_2: "Mėgaukitės pastoviomis pasyviomis pajamomis, kol užsiimate svarbiais dalykais.",
+        feature_trusted_title: "✅ Pasitikima visame pasaulyje",
         feature_trusted_desc: "Tūkstančiai patenkintų vartotojų kasdien auginančių savo BTC.",
-        footer_text: "© {year} BTCGrow. Visos teisės saugomos."
+        feature_extra_3: "Prisijunkite prie pasaulinės investuotojų bendruomenės, pasitikinčios BTCGrow.",
+        footer_text: "© {year} BTCGrow. Visos teisės saugomos.",
+        additional_title_1: "Kodėl rinktis BTCGrow?",
+        additional_desc_1: "BTCGrow siūlo saugią ir patogią platformą, padedančią lengvai padauginti jūsų Bitcoin. Mūsų pažangi technologija ir skirta pagalba užtikrina nuolatinį jūsų investicijų augimą.",
+        additional_title_2: "Kaip tai veikia",
+        additional_desc_2: "Tiesiog investuokite savo Bitcoin nuo 0.0008 BTC ir stebėkite, kaip mūsų sistema dirba 24/7 generuodama pelną. Skaidrus sekimas ir greiti išmokėjimai padaro BTCGrow jūsų patikimu kripto partneriu."
       },
       es: {
         header_title: "🚀 Duplica tu Bitcoin",
         header_subtitle: "Rendimientos rápidos, seguros y garantizados",
         hero_title: "Comienza hoy con solo 0.0008 BTC",
-        hero_description: "Multiplica tu cripto con facilidad. No se necesita experiencia. 100% confiable.",
-        cta_1: "👉 CREA Y GENERA TU BTC AHORA ⚡",
+        hero_description: "Multiplica tu cripto fácilmente. No se requiere experiencia. 100% confiable.",
+        cta_1: "👉 CRECE Y GENERA TU BTC AHORA ⚡",
         cta_2: "💰 GENERA HASTA 30 BTC",
         feature_secure_title: "✅ Plataforma segura",
-        feature_secure_desc: "Seguridad de primer nivel y transacciones encriptadas para tu tranquilidad.",
+        feature_secure_desc: "Seguridad de primer nivel y transacciones cifradas para tu tranquilidad.",
+        feature_extra_1: "Nuestra avanzada tecnología de encriptación protege tus activos las 24 horas.",
         feature_passive_title: "✅ Ganancias pasivas",
-        feature_passive_desc: "Invierte una vez y mira cómo tu Bitcoin se multiplica sin trabajo extra.",
+        feature_passive_desc: "Invierte una vez y observa cómo tu Bitcoin se multiplica sin trabajo adicional.",
+        feature_extra_2: "Disfruta de ingresos pasivos constantes mientras te concentras en lo que importa.",
         feature_trusted_title: "✅ Confiable en todo el mundo",
-        feature_trusted_desc: "Miles de usuarios satisfechos que crecen su BTC diariamente.",
-        footer_text: "© {year} BTCGrow. Todos los derechos reservados."
+        feature_trusted_desc: "Miles de usuarios satisfechos que hacen crecer su BTC diariamente.",
+        feature_extra_3: "Únete a una comunidad global de inversores que confían en BTCGrow.",
+        footer_text: "© {year} BTCGrow. Todos los derechos reservados.",
+        additional_title_1: "¿Por qué elegir BTCGrow?",
+        additional_desc_1: "BTCGrow ofrece una plataforma segura y fácil de usar para ayudarte a multiplicar tu Bitcoin sin esfuerzo. Nuestra tecnología avanzada y soporte dedicado garantizan el crecimiento constante de tus inversiones.",
+        additional_title_2: "Cómo funciona",
+        additional_desc_2: "Simplemente invierte tu Bitcoin a partir de 0.0008 BTC y observa cómo nuestro sistema trabaja 24/7 para generar ganancias. Seguimiento transparente y retiros rápidos hacen de BTCGrow tu socio cripto confiable."
       },
       fr: {
         header_title: "🚀 Doublez votre Bitcoin",
-        header_subtitle: "Retours rapides, sécurisés et garantis",
+        header_subtitle: "Rendements rapides, sécurisés et garantis",
         hero_title: "Commencez aujourd'hui avec seulement 0.0008 BTC",
         hero_description: "Multipliez votre crypto facilement. Aucune expérience requise. 100% fiable.",
-        cta_1: "👉 DÉVELOPPEZ ET GÉNÉREZ VOTRE BTC MAINTENANT ⚡",
+        cta_1: "👉 CROÎTRE ET GÉNÉRER VOTRE BTC MAINTENANT ⚡",
         cta_2: "💰 GÉNÉREZ JUSQU'À 30 BTC",
         feature_secure_title: "✅ Plateforme sécurisée",
         feature_secure_desc: "Sécurité de premier ordre et transactions cryptées pour votre tranquillité d'esprit.",
+        feature_extra_1: "Notre technologie avancée de cryptage protège vos actifs 24h/24.",
         feature_passive_title: "✅ Revenus passifs",
         feature_passive_desc: "Investissez une fois et regardez votre Bitcoin se multiplier sans travail supplémentaire.",
+        feature_extra_2: "Profitez d'un revenu passif constant pendant que vous vous concentrez sur l'essentiel.",
         feature_trusted_title: "✅ Fiable dans le monde entier",
-        feature_trusted_desc: "Des milliers d'utilisateurs satisfaits faisant croître leur BTC quotidiennement.",
-        footer_text: "© {year} BTCGrow. Tous droits réservés."
+        feature_trusted_desc: "Des milliers d'utilisateurs satisfaits qui font croître leur BTC quotidiennement.",
+        feature_extra_3: "Rejoignez une communauté mondiale d'investisseurs qui font confiance à BTCGrow.",
+        footer_text: "© {year} BTCGrow. Tous droits réservés.",
+        additional_title_1: "Pourquoi choisir BTCGrow ?",
+        additional_desc_1: "BTCGrow offre une plateforme sécurisée et conviviale pour vous aider à multiplier facilement votre Bitcoin. Notre technologie avancée et notre support dédié garantissent la croissance constante de vos investissements.",
+        additional_title_2: "Comment ça marche",
+        additional_desc_2: "Investissez simplement votre Bitcoin à partir de 0.0008 BTC et regardez notre système travailler 24h/24 pour générer des profits. Le suivi transparent et les retraits rapides font de BTCGrow votre partenaire crypto fiable."
       },
       de: {
         header_title: "🚀 Verdoppeln Sie Ihr Bitcoin",
         header_subtitle: "Schnelle, sichere und garantierte Renditen",
-        hero_title: "Starten Sie noch heute mit nur 0.0008 BTC",
-        hero_description: "Vermehren Sie Ihre Krypto mit Leichtigkeit. Keine Erfahrung nötig. 100 % vertrauenswürdig.",
-        cta_1: "👉 WACHSEN UND GENERIEREN SIE JETZT IHR BTC ⚡",
+        hero_title: "Starten Sie heute mit nur 0.0008 BTC",
+        hero_description: "Multiplizieren Sie Ihre Kryptowährung mühelos. Keine Erfahrung erforderlich. 100% vertrauenswürdig.",
+        cta_1: "👉 WACHSEN & GENERIEREN SIE JETZT IHR BTC ⚡",
         cta_2: "💰 GENERIEREN SIE BIS ZU 30 BTC",
         feature_secure_title: "✅ Sichere Plattform",
         feature_secure_desc: "Erstklassige Sicherheit und verschlüsselte Transaktionen für Seelenfrieden.",
+        feature_extra_1: "Unsere fortschrittliche Verschlüsselungstechnologie schützt Ihre Vermögenswerte rund um die Uhr.",
         feature_passive_title: "✅ Passive Einnahmen",
-        feature_passive_desc: "Investieren Sie einmal und sehen Sie zu, wie Ihr Bitcoin ohne zusätzliche Arbeit wächst.",
-        feature_trusted_title: "✅ Weltweit vertrauenswürdig",
-        feature_trusted_desc: "Tausende zufriedene Benutzer, die täglich ihr BTC vergrößern.",
-        footer_text: "© {year} BTCGrow. Alle Rechte vorbehalten."
+        feature_passive_desc: "Investieren Sie einmal und sehen Sie zu, wie sich Ihr Bitcoin ohne zusätzliche Arbeit vervielfacht.",
+        feature_extra_2: "Genießen Sie ein stetiges passives Einkommen, während Sie sich auf das Wesentliche konzentrieren.",
+        feature_trusted_title: "✅ Weltweit vertraut",
+        feature_trusted_desc: "Tausende zufriedene Benutzer, die täglich ihr BTC wachsen lassen.",
+        feature_extra_3: "Schließen Sie sich einer globalen Gemeinschaft von Investoren an, die BTCGrow vertrauen.",
+        footer_text: "© {year} BTCGrow. Alle Rechte vorbehalten.",
+        additional_title_1: "Warum BTCGrow wählen?",
+        additional_desc_1: "BTCGrow bietet eine sichere und benutzerfreundliche Plattform, die Ihnen hilft, Ihr Bitcoin mühelos zu vervielfachen. Unsere fortschrittliche Technologie und engagierter Support sorgen für stetiges Wachstum Ihrer Investitionen.",
+        additional_title_2: "Wie es funktioniert",
+        additional_desc_2: "Investieren Sie einfach Ihr Bitcoin ab 0.0008 BTC und beobachten Sie, wie unser System rund um die Uhr Gewinne generiert. Transparente Verfolgung und schnelle Auszahlungen machen BTCGrow zu Ihrem vertrauenswürdigen Krypto-Partner."
       },
       it: {
         header_title: "🚀 Raddoppia il tuo Bitcoin",
         header_subtitle: "Rendimenti veloci, sicuri e garantiti",
         hero_title: "Inizia oggi con solo 0.0008 BTC",
-        hero_description: "Moltiplica la tua criptovaluta facilmente. Nessuna esperienza necessaria. 100% affidabile.",
-        cta_1: "👉 CRESCI E GENERA IL TUO BTC ORA ⚡",
+        hero_description: "Moltiplica la tua cripto con facilità. Nessuna esperienza necessaria. 100% affidabile.",
+        cta_1: "👉 CRESCI & GENERA IL TUO BTC ORA ⚡",
         cta_2: "💰 GENERA FINO A 30 BTC",
         feature_secure_title: "✅ Piattaforma sicura",
-        feature_secure_desc: "Sicurezza di prim'ordine e transazioni crittografate per la tranquillità.",
+        feature_secure_desc: "Sicurezza di alto livello e transazioni criptate per la tua tranquillità.",
+        feature_extra_1: "La nostra tecnologia di crittografia avanzata protegge i tuoi asset 24 ore su 24.",
         feature_passive_title: "✅ Guadagni passivi",
         feature_passive_desc: "Investi una volta e guarda il tuo Bitcoin moltiplicarsi senza lavoro extra.",
+        feature_extra_2: "Goditi un reddito passivo costante mentre ti concentri su ciò che conta.",
         feature_trusted_title: "✅ Affidabile in tutto il mondo",
         feature_trusted_desc: "Migliaia di utenti soddisfatti che crescono il loro BTC quotidianamente.",
-        footer_text: "© {year} BTCGrow. Tutti i diritti riservati."
+        feature_extra_3: "Unisciti a una comunità globale di investitori che si fidano di BTCGrow.",
+        footer_text: "© {year} BTCGrow. Tutti i diritti riservati.",
+        additional_title_1: "Perché scegliere BTCGrow?",
+        additional_desc_1: "BTCGrow offre una piattaforma sicura e facile da usare per aiutarti a moltiplicare facilmente il tuo Bitcoin. La nostra tecnologia avanzata e il supporto dedicato garantiscono la crescita costante dei tuoi investimenti.",
+        additional_title_2: "Come funziona",
+        additional_desc_2: "Basta investire il tuo Bitcoin a partire da 0.0008 BTC e guardare il nostro sistema lavorare 24 ore su 24 per generare profitti. Monitoraggio trasparente e prelievi rapidi rendono BTCGrow il tuo partner crypto di fiducia."
       },
       ru: {
         header_title: "🚀 Удвоьте свой Биткоин",
         header_subtitle: "Быстрая, безопасная и гарантированная прибыль",
         hero_title: "Начните сегодня всего с 0.0008 BTC",
-        hero_description: "Легко приумножайте свою криптовалюту. Опыт не нужен. 100% надежно.",
-        cta_1: "👉 РАСТИТЕ И ГЕНЕРИРУЙТЕ СВОЙ BTC СЕЙЧАС ⚡",
-        cta_2: "💰 ГЕНЕРИРУЙТЕ ДО 30 BTC",
+        hero_description: "Умножайте свою крипту легко. Опыт не требуется. 100% надежно.",
+        cta_1: "👉 РАСТИ И ЗАРАБАТЫВАЙ СВОЙ BTC СЕЙЧАС ⚡",
+        cta_2: "💰 ЗАРАБАТЫВАЙ ДО 30 BTC",
         feature_secure_title: "✅ Безопасная платформа",
-        feature_secure_desc: "Высокий уровень безопасности и зашифрованные транзакции для спокойствия.",
+        feature_secure_desc: "Высокий уровень безопасности и зашифрованные транзакции для вашего спокойствия.",
+        feature_extra_1: "Наша передовая технология шифрования защищает ваши активы круглосуточно.",
         feature_passive_title: "✅ Пассивный доход",
         feature_passive_desc: "Инвестируйте один раз и наблюдайте, как ваш Биткоин растет без дополнительной работы.",
-        feature_trusted_title: "✅ Доверие по всему миру",
-        feature_trusted_desc: "Тысячи довольных пользователей, ежедневно увеличивающих свой BTC.",
-        footer_text: "© {year} BTCGrow. Все права защищены."
+        feature_extra_2: "Наслаждайтесь стабильным пассивным доходом, пока занимаетесь важными делами.",
+        feature_trusted_title: "✅ Надежность по всему миру",
+        feature_trusted_desc: "Тысячи довольных пользователей ежедневно увеличивают свой BTC.",
+        feature_extra_3: "Присоединяйтесь к глобальному сообществу инвесторов, доверяющих BTCGrow.",
+        footer_text: "© {year} BTCGrow. Все права защищены.",
+        additional_title_1: "Почему выбирают BTCGrow?",
+        additional_desc_1: "BTCGrow предлагает безопасную и удобную платформу, которая помогает легко умножать ваш Биткоин. Наши передовые технологии и профессиональная поддержка обеспечивают стабильный рост инвестиций.",
+        additional_title_2: "Как это работает",
+        additional_desc_2: "Просто инвестируйте от 0.0008 BTC и наблюдайте, как наша система работает 24/7, принося прибыль. Прозрачный контроль и быстрые выводы делают BTCGrow вашим надежным криптопартнером."
       },
       ja: {
         header_title: "🚀 ビットコインを倍増しよう",
-        header_subtitle: "速く、安全、保証されたリターン",
+        header_subtitle: "迅速で安全、保証されたリターン",
         hero_title: "わずか0.0008 BTCから今日始めよう",
-        hero_description: "簡単に暗号通貨を増やせます。経験不要。100％信頼されています。",
-        cta_1: "👉 今すぐBTCを増やして生成しよう ⚡",
+        hero_description: "簡単に暗号資産を増やそう。経験不要。100%信頼。",
+        cta_1: "👉 今すぐBTCを増やす＆生成 ⚡",
         cta_2: "💰 最大30 BTCを生成",
         feature_secure_title: "✅ 安全なプラットフォーム",
-        feature_secure_desc: "最高レベルのセキュリティと暗号化された取引で安心。",
-        feature_passive_title: "✅ 受動的収益",
+        feature_secure_desc: "安心のための最高レベルのセキュリティと暗号化された取引。",
+        feature_extra_1: "高度な暗号化技術が24時間あなたの資産を保護します。",
+        feature_passive_title: "✅ パッシブ収益",
         feature_passive_desc: "一度投資すれば、追加の作業なしでビットコインが増えます。",
-        feature_trusted_title: "✅ 世界中で信頼されています",
-        feature_trusted_desc: "毎日BTCを増やしている何千人もの満足したユーザー。",
-        footer_text: "© {year} BTCGrow。全著作権所有。"
+        feature_extra_2: "重要なことに集中しながら、安定したパッシブ収入をお楽しみください。",
+        feature_trusted_title: "✅ 世界中で信頼されている",
+        feature_trusted_desc: "毎日BTCを増やしている満足した何千人ものユーザー。",
+        feature_extra_3: "BTCGrowを信頼するグローバルな投資家コミュニティに参加しましょう。",
+        footer_text: "© {year} BTCGrow. 全著作権所有。",
+        additional_title_1: "なぜBTCGrowを選ぶのか？",
+        additional_desc_1: "BTCGrowは、安全で使いやすいプラットフォームを提供し、あなたのビットコインを簡単に増やす手助けをします。先進技術と専任サポートにより、投資が安定的に成長します。",
+        additional_title_2: "仕組み",
+        additional_desc_2: "0.0008 BTCから投資を始め、システムが24時間365日利益を生み出す様子をご覧ください。透明な追跡と迅速な引き出しにより、BTCGrowはあなたの信頼できる暗号パートナーです。"
       },
       zh: {
-        header_title: "🚀 翻倍您的比特币",
-        header_subtitle: "快速、安全且有保证的回报",
-        hero_title: "从仅0.0008 BTC开始今天投资",
-        hero_description: "轻松增长您的加密货币。无需经验。100%可信赖。",
-        cta_1: "👉 立即增长并生成您的BTC ⚡",
+        header_title: "🚀 让你的比特币翻倍",
+        header_subtitle: "快速、安全，保证回报",
+        hero_title: "从仅0.0008 BTC开始",
+        hero_description: "轻松增长你的加密货币。无需经验。100%可信。",
+        cta_1: "👉 立即增长并生成你的BTC ⚡",
         cta_2: "💰 生成高达30 BTC",
         feature_secure_title: "✅ 安全平台",
-        feature_secure_desc: "顶级安全和加密交易，确保安心。",
+        feature_secure_desc: "顶级安全和加密交易，保障安心。",
+        feature_extra_1: "我们的先进加密技术全天候保护您的资产。",
         feature_passive_title: "✅ 被动收益",
-        feature_passive_desc: "一次投资，无需额外工作，观看比特币增长。",
+        feature_passive_desc: "一次投资，无需额外操作，见证比特币增长。",
+        feature_extra_2: "专注重要事物的同时享受持续的被动收入。",
         feature_trusted_title: "✅ 全球信赖",
-        feature_trusted_desc: "数千满意用户每日增长其BTC。",
-        footer_text: "© {year} BTCGrow。版权所有。"
+        feature_trusted_desc: "数千满意用户每日增长BTC。",
+        feature_extra_3: "加入信任BTCGrow的全球投资者社区。",
+        footer_text: "© {year} BTCGrow。保留所有权利。",
+        additional_title_1: "为什么选择BTCGrow？",
+        additional_desc_1: "BTCGrow提供一个安全且用户友好的平台，帮助您轻松倍增比特币。我们的先进技术和专属支持确保投资稳步增长。",
+        additional_title_2: "它是如何工作的",
+        additional_desc_2: "只需从0.0008 BTC开始投资，观看我们的系统全天候运行产生利润。透明跟踪和快速提现使BTCGrow成为您可信赖的加密伙伴。"
       },
       pt: {
         header_title: "🚀 Dobre seu Bitcoin",
         header_subtitle: "Retornos rápidos, seguros e garantidos",
         hero_title: "Comece hoje com apenas 0.0008 BTC",
-        hero_description: "Multiplique seu cripto com facilidade. Nenhuma experiência necessária. 100% confiável.",
+        hero_description: "Multiplique sua cripto com facilidade. Nenhuma experiência necessária. 100% confiável.",
         cta_1: "👉 CRESÇA E GERE SEU BTC AGORA ⚡",
         cta_2: "💰 GERE ATÉ 30 BTC",
         feature_secure_title: "✅ Plataforma segura",
-        feature_secure_desc: "Segurança de primeira linha e transações criptografadas para tranquilidade.",
+        feature_secure_desc: "Segurança de primeira linha e transações criptografadas para sua tranquilidade.",
+        feature_extra_1: "Nossa tecnologia avançada de criptografia protege seus ativos 24/7.",
         feature_passive_title: "✅ Ganhos passivos",
         feature_passive_desc: "Invista uma vez e veja seu Bitcoin multiplicar sem trabalho extra.",
-        feature_trusted_title: "✅ Confiável em todo o mundo",
-        feature_trusted_desc: "Milhares de usuários satisfeitos que crescem seu BTC diariamente.",
-        footer_text: "© {year} BTCGrow. Todos os direitos reservados."
+        feature_extra_2: "Aproveite uma renda passiva constante enquanto se concentra no que importa.",
+        feature_trusted_title: "✅ Confiável mundialmente",
+        feature_trusted_desc: "Milhares de usuários satisfeitos crescendo seu BTC diariamente.",
+        feature_extra_3: "Junte-se a uma comunidade global de investidores que confiam na BTCGrow.",
+        footer_text: "© {year} BTCGrow. Todos os direitos reservados.",
+        additional_title_1: "Por que escolher BTCGrow?",
+        additional_desc_1: "BTCGrow oferece uma plataforma segura e fácil de usar para ajudá-lo a multiplicar seu Bitcoin sem esforço. Nossa tecnologia avançada e suporte dedicado garantem o crescimento constante de seus investimentos.",
+        additional_title_2: "Como funciona",
+        additional_desc_2: "Simplesmente invista seu Bitcoin a partir de 0.0008 BTC e veja nosso sistema trabalhar 24/7 para gerar lucros. Rastreamento transparente e saques rápidos fazem do BTCGrow seu parceiro cripto confiável."
       }
     };
 
     function setLanguage(lang) {
-      if (!translations[lang]) lang = 'en'; // fallback English
+      if (!translations[lang]) lang = 'en';
       const t = translations[lang];
 
-      document.querySelector("header h1").textContent = t.header_title;
-      document.querySelector("header p").textContent = t.header_subtitle;
+      // Header
+      document.querySelector('header h1').textContent = t.header_title;
+      document.querySelector('header p').textContent = t.header_subtitle;
 
-      const hero = document.querySelector(".hero");
-      hero.querySelector("h2").textContent = t.hero_title;
-      hero.querySelector("p").textContent = t.hero_description;
+      // Hero
+      document.querySelector('.hero h2').textContent = t.hero_title;
+      document.querySelector('.hero p').textContent = t.hero_description;
 
-      const ctas = document.querySelectorAll(".cta-button");
-      ctas[0].textContent = t.cta_1;
-      ctas[1].textContent = t.cta_2;
+      // Buttons
+      const buttons = document.querySelectorAll('.cta-button');
+      buttons[0].textContent = t.cta_1;
+      buttons[1].textContent = t.cta_2;
 
-      const features = document.querySelectorAll(".feature");
-      features[0].querySelector("h3").textContent = t.feature_secure_title;
-      features[0].querySelector("p").textContent = t.feature_secure_desc;
+      // Features titles and descriptions
+      const featureDivs = document.querySelectorAll('.feature');
+      featureDivs[0].querySelector('h3').textContent = t.feature_secure_title;
+      featureDivs[0].querySelector('p').textContent = t.feature_secure_desc;
+      featureDivs[0].querySelector('.extra-text').textContent = t.feature_extra_1;
 
-      features[1].querySelector("h3").textContent = t.feature_passive_title;
-      features[1].querySelector("p").textContent = t.feature_passive_desc;
+      featureDivs[1].querySelector('h3').textContent = t.feature_passive_title;
+      featureDivs[1].querySelector('p').textContent = t.feature_passive_desc;
+      featureDivs[1].querySelector('.extra-text').textContent = t.feature_extra_2;
 
-      features[2].querySelector("h3").textContent = t.feature_trusted_title;
-      features[2].querySelector("p").textContent = t.feature_trusted_desc;
+      featureDivs[2].querySelector('h3').textContent = t.feature_trusted_title;
+      featureDivs[2].querySelector('p').textContent = t.feature_trusted_desc;
+      featureDivs[2].querySelector('.extra-text').textContent = t.feature_extra_3;
 
-      document.querySelector("footer").innerHTML = t.footer_text.replace("{year}", new Date().getFullYear()) +
-        `<br><br>
-        <a href="https://info.flagcounter.com/S8t6" target="_blank" rel="noopener">
-          <img src="https://s11.flagcounter.com/count2/S8t6/bg_0b0f1a/txt_ffffff/border_333333/columns_3/maxflags_20/viewers_1/labels_0/pageviews_0/flags_0/" alt="Flag Counter" border="0">
-        </a>`;
+      // Additional content sections
+      document.getElementById('additional-title-1').textContent = t.additional_title_1;
+      document.getElementById('additional-desc-1').textContent = t.additional_desc_1;
+      document.getElementById('additional-title-2').textContent = t.additional_title_2;
+      document.getElementById('additional-desc-2').textContent = t.additional_desc_2;
+
+      // Footer
+      document.querySelector('footer').innerHTML = t.footer_text.replace('{year}', new Date().getFullYear()) + '<br><br>' +
+        '<a href="https://info.flagcounter.com/S8t6" target="_blank" rel="noopener">' +
+        '<img src="https://s11.flagcounter.com/count2/S8t6/bg_0b0f1a/txt_ffffff/border_333333/columns_3/maxflags_20/viewers_1/labels_0/pageviews_0/flags_0/" alt="Flag Counter" border="0">' +
+        '</a>';
     }
 
-    // Inicialiai anglų kalba
-    setLanguage('en');
-
-    // Kai keičiam kalbą dropdown menu
     document.getElementById('language-selector').addEventListener('change', (e) => {
       setLanguage(e.target.value);
     });
 
-    // BTC kainos atnaujinimas, kaip buvo
-    async function fetchBTCPrice() {
-      try {
-        const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,eur");
-        const data = await response.json();
-        const usd = data.bitcoin.usd.toLocaleString("en-US", {
-          style: "currency",
-          currency: "USD"
-        });
-        const eur = data.bitcoin.eur.toLocaleString("de-DE", {
-          style: "currency",
-          currency: "EUR"
-        });
-        document.getElementById("btc-price").innerHTML =
-          `💹 BTC Price: <strong>${usd}</strong> / <strong>${eur}</strong>`;
-      } catch (error) {
-        document.getElementById("btc-price").innerHTML = "⚠️ BTC price not available.";
-      }
+    // Pradinis nustatymas pagal naršyklės kalbą arba angliškai
+    const userLang = navigator.language.slice(0, 2);
+    if (translations[userLang]) {
+      document.getElementById('language-selector').value = userLang;
+      setLanguage(userLang);
+    } else {
+      setLanguage('en');
     }
-
-    fetchBTCPrice();
-    setInterval(fetchBTCPrice, 60000);
-
-    // Metų įterpimas footer
-    document.getElementById("year").textContent = new Date().getFullYear();
-
   </script>
 </body>
 </html>
