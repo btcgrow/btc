@@ -46,6 +46,43 @@
     }
     header h1 { font-size: 2.5rem; color: #ffc107; }
     header p { font-size: 1rem; margin-top: 10px; color: #ccc; }
+
+    /* Kalbų pasirinkimo konteineris centravimui */
+    .language-selector-container {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    /* Kalbų select stilius pritaikytas pagal dizainą */
+    #language-selector {
+      background-color: #1a1f2b;       /* tamsus fonas */
+      color: #ffc107;                  /* geltona spalva */
+      border: 2px solid #ffc107;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 1.1rem;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 0 8px #ffc107aa;
+      outline: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      max-width: 280px;
+      width: 90%;
+    }
+    #language-selector:hover,
+    #language-selector:focus {
+      background-color: #ffc107;
+      color: #0b0f1a;
+      box-shadow: 0 0 12px #ffc107ff;
+      transform: scale(1.05);
+    }
+    #language-selector::-ms-expand {
+      display: none;
+    }
+
     .hero {
       background: url('https://chat.openai.com/mnt/data/A_promotional_digital_graphic_advertisement_featur.png') no-repeat center center/cover;
       padding: 80px 20px;
@@ -116,26 +153,7 @@
       70% { transform: scale(0.9); }
       100% { transform: scale(1); }
     }
-  .language-toggle {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  z-index: 1000;
-  background: rgba(0, 0, 0, 0.6);
-  padding: 10px;
-  border-radius: 5px;
-  color: white;
-  font-size: 0.9rem;
-}
-.language-toggle select {
-  background: #1a1f2b;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  margin-left: 5px;
-}
-</style>
+  </style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -169,34 +187,37 @@
   </script>
 </head>
 <body>
-  <div class="language-toggle">
-    <label for="lang">🌐 Language:</label>
-    <select id="lang" onchange="changeLang()">
-      <option value="en" selected>English</option>
-      <option value="lt">Lietuvių</option>
-      <option value="es">Español</option>
-      <option value="de">Deutsch</option>
-      <option value="fr">Français</option>
-      <option value="pl">Polski</option>
-      <option value="ru">Русский</option>
-      <option value="pt">Português</option>
-      <option value="it">Italiano</option>
-      <option value="tr">Türkçe</option>
-      <!-- Add more languages as needed -->
-    </select>
-  </div>
   <header>
     <h1>🚀 Double Your Bitcoin</h1>
     <p>Fast, Secure & Guaranteed Returns</p>
   </header>
+
+  <!-- Kalbų pasirinkimo dropdown -->
+  <div class="language-selector-container">
+    <select id="language-selector" aria-label="Select language">
+      <option value="en">English</option>
+      <option value="lt">Lietuvių</option>
+      <option value="es">Español</option>
+      <option value="fr">Français</option>
+      <option value="de">Deutsch</option>
+      <option value="it">Italiano</option>
+      <option value="ru">Русский</option>
+      <option value="ja">日本語</option>
+      <option value="zh">中文</option>
+      <option value="pt">Português</option>
+    </select>
+  </div>
+
   <section class="hero">
     <h2>Start Today from Just 0.0008 BTC</h2>
+    <div id="btc-price" style="margin: 15px auto 10px; font-size: 1.1rem; color: #00ff99;"></div>
     <p>Multiply your crypto with ease. No experience needed. 100% trusted.</p>
     <div class="cta-buttons">
       <a href="https://bitcoin-doubler.netlify.app/" class="cta-button" target="_blank">👉 GROW & GENERATE YOUR BTC NOW ⚡</a>
       <a href="https://www.btcgenerator.one/" class="cta-button" target="_blank">💰 GENERATE UP TO 30 BTC</a>
     </div>
   </section>
+
   <section class="features">
     <div class="feature">
       <h3>✅ Secure Platform</h3>
@@ -211,191 +232,236 @@
       <p>Thousands of satisfied users growing their BTC daily.</p>
     </div>
   </section>
+
   <footer>
-    &copy; <span id="year"></span> BTCGrow. All rights reserved.
+    &copy; <span id="year"></span> BTCGrow. All rights reserved.<br><br>
+    <a href="https://info.flagcounter.com/S8t6" target="_blank" rel="noopener">
+      <img src="https://s11.flagcounter.com/count2/S8t6/bg_0b0f1a/txt_ffffff/border_333333/columns_3/maxflags_20/viewers_1/labels_0/pageviews_0/flags_0/" alt="Flag Counter" border="0">
+    </a>
   </footer>
+
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
-<script>
-  const translations = {
-    en: {
-      headerTitle: "🚀 Double Your Bitcoin",
-      headerSubtitle: "Fast, Secure & Guaranteed Returns",
-      heroTitle: "Start Today from Just 0.0008 BTC",
-      heroText: "Multiply your crypto with ease. No experience needed. 100% trusted.",
-      cta1: "👉 GROW & GENERATE YOUR BTC NOW ⚡",
-      cta2: "💰 GENERATE UP TO 30 BTC",
-      feature1: "✅ Secure Platform",
-      feature1Text: "Top-tier security and encrypted transactions for peace of mind.",
-      feature2: "✅ Passive Earnings",
-      feature2Text: "Invest once and watch your Bitcoin multiply with no extra work.",
-      feature3: "✅ Trusted Worldwide",
-      feature3Text: "Thousands of satisfied users growing their BTC daily."
-    },
-    lt: {
-      headerTitle: "🚀 Padvigubink savo Bitcoin",
-      headerSubtitle: "Greita, saugu ir garantuota grąža",
-      heroTitle: "Pradėkite nuo tik 0.0008 BTC",
-      heroText: "Padauginkite savo kriptovaliutą lengvai. Jokios patirties nereikia. 100% patikima.",
-      cta1: "👉 AUGINKITE IR GENERUOKITE BTC DABAR ⚡",
-      cta2: "💰 GENERUOKITE IKI 30 BTC",
-      feature1: "✅ Saugus sprendimas",
-      feature1Text: "Aukščiausio lygio saugumas ir šifruoti sandoriai.",
-      feature2: "✅ Pasyvios pajamos",
-      feature2Text: "Investuokite vieną kartą ir stebėkite augimą.",
-      feature3: "✅ Patikimas visame pasaulyje",
-      feature3Text: "Tūkstančiai patenkintų vartotojų kasdien."
-    },
-    es: {
-      headerTitle: "🚀 Duplica tu Bitcoin",
-      headerSubtitle: "Rápido, Seguro y con Retornos Garantizados",
-      heroTitle: "Comienza hoy desde solo 0.0008 BTC",
-      heroText: "Multiplica tu cripto fácilmente. No se necesita experiencia. 100% confiable.",
-      cta1: "👉 AUMENTA Y GENERA TU BTC AHORA ⚡",
-      cta2: "💰 GENERA HASTA 30 BTC",
-      feature1: "✅ Plataforma Segura",
-      feature1Text: "Seguridad de primer nivel y transacciones cifradas para tu tranquilidad.",
-      feature2: "✅ Ingresos Pasivos",
-      feature2Text: "Invierte una vez y mira cómo tu Bitcoin se multiplica sin esfuerzo.",
-      feature3: "✅ Confiado en todo el mundo",
-      feature3Text: "Miles de usuarios satisfechos aumentando su BTC a diario."
-    },
-    de: {
-      headerTitle: "🚀 Verdopple dein Bitcoin",
-      headerSubtitle: "Schnell, Sicher & Garantierte Rendite",
-      heroTitle: "Starte heute mit nur 0.0008 BTC",
-      heroText: "Multipliziere deine Krypto mühelos. Keine Erfahrung nötig. 100% vertrauenswürdig.",
-      cta1: "👉 WACHSE & GENERIERE JETZT BTC ⚡",
-      cta2: "💰 GENERIERE BIS ZU 30 BTC",
-      feature1: "✅ Sichere Plattform",
-      feature1Text: "Erstklassige Sicherheit und verschlüsselte Transaktionen für dein Vertrauen.",
-      feature2: "✅ Passives Einkommen",
-      feature2Text: "Einmal investieren und zuschauen, wie dein Bitcoin wächst.",
-      feature3: "✅ Weltweit vertraut",
-      feature3Text: "Tausende zufriedene Nutzer, die täglich BTC generieren."
-    },
-    fr: {
-      headerTitle: "🚀 Doublez votre Bitcoin",
-      headerSubtitle: "Rapide, Sécurisé & Rendements Garantis",
-      heroTitle: "Commencez dès aujourd'hui avec seulement 0.0008 BTC",
-      heroText: "Multipliez votre crypto facilement. Aucune expérience requise. 100% fiable.",
-      cta1: "👉 DÉVELOPPEZ ET GÉNÉREZ VOTRE BTC MAINTENANT ⚡",
-      cta2: "💰 GÉNÉREZ JUSQU’À 30 BTC",
-      feature1: "✅ Plateforme Sécurisée",
-      feature1Text: "Sécurité de haut niveau et transactions cryptées pour une tranquillité d’esprit.",
-      feature2: "✅ Revenus Passifs",
-      feature2Text: "Investissez une fois et regardez votre Bitcoin se multiplier sans effort.",
-      feature3: "✅ Fiable dans le monde entier",
-      feature3Text: "Des milliers d'utilisateurs satisfaits font croître leur BTC chaque jour."
-    },
-    pl: {
-      headerTitle: "🚀 Podwój swój Bitcoin",
-      headerSubtitle: "Szybko, Bezpiecznie i z Gwarantowanym Zyskiem",
-      heroTitle: "Zacznij już dziś od zaledwie 0.0008 BTC",
-      heroText: "Zwiększ swoje kryptowaluty z łatwością. Bez doświadczenia. 100% zaufania.",
-      cta1: "👉 ROZWIJAJ I GENERUJ SWOJE BTC TERAZ ⚡",
-      cta2: "💰 WYGENERUJ DO 30 BTC",
-      feature1: "✅ Bezpieczna Platforma",
-      feature1Text: "Najwyższy poziom bezpieczeństwa i szyfrowane transakcje.",
-      feature2: "✅ Dochód Pasywny",
-      feature2Text: "Zainwestuj raz i obserwuj wzrost Bitcoina bez wysiłku.",
-      feature3: "✅ Zaufana na całym świecie",
-      feature3Text: "Tysiące zadowolonych użytkowników codziennie zwiększają swój BTC."
-    },
-    ru: {
-      headerTitle: "🚀 Удвоить ваш Биткойн",
-      headerSubtitle: "Быстро, Безопасно и с Гарантированной Прибылью",
-      heroTitle: "Начните сегодня с всего 0.0008 BTC",
-      heroText: "Умножьте свои криптоактивы легко. Без опыта. 100% доверие.",
-      cta1: "👉 РАСТИТЕ И ГЕНЕРИРУЙТЕ BTC СЕЙЧАС ⚡",
-      cta2: "💰 ГЕНЕРИРУЙТЕ ДО 30 BTC",
-      feature1: "✅ Безопасная Платформа",
-      feature1Text: "Высокий уровень безопасности и зашифрованные транзакции.",
-      feature2: "✅ Пассивный Доход",
-      feature2Text: "Инвестируйте один раз и наблюдайте за ростом своего BTC.",
-      feature3: "✅ Доверие по всему миру",
-      feature3Text: "Тысячи довольных пользователей ежедневно увеличивают свой BTC."
-    },
-    pt: {
-      headerTitle: "🚀 Dobre seu Bitcoin",
-      headerSubtitle: "Rápido, Seguro e com Retornos Garantidos",
-      heroTitle: "Comece hoje com apenas 0.0008 BTC",
-      heroText: "Multiplique sua criptomoeda com facilidade. Sem experiência. 100% confiável.",
-      cta1: "👉 CRESÇA E GERE SEU BTC AGORA ⚡",
-      cta2: "💰 GERE ATÉ 30 BTC",
-      feature1: "✅ Plataforma Segura",
-      feature1Text: "Segurança de alto nível e transações criptografadas.",
-      feature2: "✅ Renda Passiva",
-      feature2Text: "Invista uma vez e veja seu Bitcoin crescer sem esforço.",
-      feature3: "✅ Confiável em todo o mundo",
-      feature3Text: "Milhares de usuários satisfeitos aumentam seu BTC diariamente."
-    },
-    it: {
-      headerTitle: "🚀 Raddoppia il tuo Bitcoin",
-      headerSubtitle: "Veloce, Sicuro e con Rendimento Garantito",
-      heroTitle: "Inizia oggi con solo 0.0008 BTC",
-      heroText: "Moltiplica la tua criptovaluta facilmente. Nessuna esperienza richiesta. 100% affidabile.",
-      cta1: "👉 CRESCI E GENERA IL TUO BTC ORA ⚡",
-      cta2: "💰 GENERA FINO A 30 BTC",
-      feature1: "✅ Piattaforma Sicura",
-      feature1Text: "Sicurezza di alto livello e transazioni crittografate.",
-      feature2: "✅ Reddito Passivo",
-      feature2Text: "Investi una volta e guarda crescere il tuo Bitcoin senza sforzo.",
-      feature3: "✅ Affidabile in tutto il mondo",
-      feature3Text: "Migliaia di utenti soddisfatti aumentano il loro BTC ogni giorno."
-    },
-    tr: {
-      headerTitle: "🚀 Bitcoin'unuzu İkiye Katlayın",
-      headerSubtitle: "Hızlı, Güvenli ve Garantili Getiri",
-      heroTitle: "Sadece 0.0008 BTC ile Bugün Başlayın",
-      heroText: "Kriptonuzu kolayca çoğaltın. Deneyim gerekmez. %100 güvenilir.",
-      cta1: "👉 BTC'NİZİ ŞİMDİ BÜYÜTÜN VE ÜRETİN ⚡",
-      cta2: "💰 30 BTC'YE KADAR ÜRETİN",
-      feature1: "✅ Güvenli Platform",
-      feature1Text: "Üst düzey güvenlik ve şifreli işlemler.",
-      feature2: "✅ Pasif Gelir",
-      feature2Text: "Bir kez yatırım yapın ve Bitcoin'inizin zahmetsizce büyümesini izleyin.",
-      feature3: "✅ Dünya Çapında Güvenilir",
-      feature3Text: "Her gün BTC'sini büyüten binlerce mutlu kullanıcı."
-    }
-};
 
-  function changeLang() {
-    const lang = document.getElementById("lang").value;
-    const t = translations[lang];
-    if (!t) return;
-
-    const update = (selector, text) => {
-      const el = document.querySelector(selector);
-      if (el) el.innerText = text;
+    const translations = {
+      en: {
+        header_title: "🚀 Double Your Bitcoin",
+        header_subtitle: "Fast, Secure & Guaranteed Returns",
+        hero_title: "Start Today from Just 0.0008 BTC",
+        hero_description: "Multiply your crypto with ease. No experience needed. 100% trusted.",
+        cta_1: "👉 GROW & GENERATE YOUR BTC NOW ⚡",
+        cta_2: "💰 GENERATE UP TO 30 BTC",
+        feature_secure_title: "✅ Secure Platform",
+        feature_secure_desc: "Top-tier security and encrypted transactions for peace of mind.",
+        feature_passive_title: "✅ Passive Earnings",
+        feature_passive_desc: "Invest once and watch your Bitcoin multiply with no extra work.",
+        feature_trusted_title: "✅ Trusted Worldwide",
+        feature_trusted_desc: "Thousands of satisfied users growing their BTC daily.",
+        footer_text: "© {year} BTCGrow. All rights reserved."
+      },
+      lt: {
+        header_title: "🚀 Padvigubinkite savo Bitcoin",
+        header_subtitle: "Greiti, saugūs ir garantuoti pelnai",
+        hero_title: "Pradėkite šiandien nuo vos 0.0008 BTC",
+        hero_description: "Lengvai padauginkite savo kriptovaliutą. Patirties nereikia. 100% patikima.",
+        cta_1: "👉 AUGINKITE IR GENERUOKITE SAVO BTC DABAR ⚡",
+        cta_2: "💰 GENERUOKITE IKI 30 BTC",
+        feature_secure_title: "✅ Saugioji platforma",
+        feature_secure_desc: "Aukščiausio lygio saugumas ir užšifruotos transakcijos ramybei.",
+        feature_passive_title: "✅ Pasyvių pajamų šaltinis",
+        feature_passive_desc: "Investuokite vieną kartą ir stebėkite, kaip jūsų Bitcoin auga be papildomo darbo.",
+        feature_trusted_title: "✅ Patikima visame pasaulyje",
+        feature_trusted_desc: "Tūkstančiai patenkintų vartotojų kasdien auginančių savo BTC.",
+        footer_text: "© {year} BTCGrow. Visos teisės saugomos."
+      },
+      es: {
+        header_title: "🚀 Duplica tu Bitcoin",
+        header_subtitle: "Rendimientos rápidos, seguros y garantizados",
+        hero_title: "Comienza hoy con solo 0.0008 BTC",
+        hero_description: "Multiplica tu cripto con facilidad. No se necesita experiencia. 100% confiable.",
+        cta_1: "👉 CREA Y GENERA TU BTC AHORA ⚡",
+        cta_2: "💰 GENERA HASTA 30 BTC",
+        feature_secure_title: "✅ Plataforma segura",
+        feature_secure_desc: "Seguridad de primer nivel y transacciones encriptadas para tu tranquilidad.",
+        feature_passive_title: "✅ Ganancias pasivas",
+        feature_passive_desc: "Invierte una vez y mira cómo tu Bitcoin se multiplica sin trabajo extra.",
+        feature_trusted_title: "✅ Confiable en todo el mundo",
+        feature_trusted_desc: "Miles de usuarios satisfechos que crecen su BTC diariamente.",
+        footer_text: "© {year} BTCGrow. Todos los derechos reservados."
+      },
+      fr: {
+        header_title: "🚀 Doublez votre Bitcoin",
+        header_subtitle: "Retours rapides, sécurisés et garantis",
+        hero_title: "Commencez aujourd'hui avec seulement 0.0008 BTC",
+        hero_description: "Multipliez votre crypto facilement. Aucune expérience requise. 100% fiable.",
+        cta_1: "👉 DÉVELOPPEZ ET GÉNÉREZ VOTRE BTC MAINTENANT ⚡",
+        cta_2: "💰 GÉNÉREZ JUSQU'À 30 BTC",
+        feature_secure_title: "✅ Plateforme sécurisée",
+        feature_secure_desc: "Sécurité de premier ordre et transactions cryptées pour votre tranquillité d'esprit.",
+        feature_passive_title: "✅ Revenus passifs",
+        feature_passive_desc: "Investissez une fois et regardez votre Bitcoin se multiplier sans travail supplémentaire.",
+        feature_trusted_title: "✅ Fiable dans le monde entier",
+        feature_trusted_desc: "Des milliers d'utilisateurs satisfaits faisant croître leur BTC quotidiennement.",
+        footer_text: "© {year} BTCGrow. Tous droits réservés."
+      },
+      de: {
+        header_title: "🚀 Verdoppeln Sie Ihr Bitcoin",
+        header_subtitle: "Schnelle, sichere und garantierte Renditen",
+        hero_title: "Starten Sie noch heute mit nur 0.0008 BTC",
+        hero_description: "Vermehren Sie Ihre Krypto mit Leichtigkeit. Keine Erfahrung nötig. 100 % vertrauenswürdig.",
+        cta_1: "👉 WACHSEN UND GENERIEREN SIE JETZT IHR BTC ⚡",
+        cta_2: "💰 GENERIEREN SIE BIS ZU 30 BTC",
+        feature_secure_title: "✅ Sichere Plattform",
+        feature_secure_desc: "Erstklassige Sicherheit und verschlüsselte Transaktionen für Seelenfrieden.",
+        feature_passive_title: "✅ Passive Einnahmen",
+        feature_passive_desc: "Investieren Sie einmal und sehen Sie zu, wie Ihr Bitcoin ohne zusätzliche Arbeit wächst.",
+        feature_trusted_title: "✅ Weltweit vertrauenswürdig",
+        feature_trusted_desc: "Tausende zufriedene Benutzer, die täglich ihr BTC vergrößern.",
+        footer_text: "© {year} BTCGrow. Alle Rechte vorbehalten."
+      },
+      it: {
+        header_title: "🚀 Raddoppia il tuo Bitcoin",
+        header_subtitle: "Rendimenti veloci, sicuri e garantiti",
+        hero_title: "Inizia oggi con solo 0.0008 BTC",
+        hero_description: "Moltiplica la tua criptovaluta facilmente. Nessuna esperienza necessaria. 100% affidabile.",
+        cta_1: "👉 CRESCI E GENERA IL TUO BTC ORA ⚡",
+        cta_2: "💰 GENERA FINO A 30 BTC",
+        feature_secure_title: "✅ Piattaforma sicura",
+        feature_secure_desc: "Sicurezza di prim'ordine e transazioni crittografate per la tranquillità.",
+        feature_passive_title: "✅ Guadagni passivi",
+        feature_passive_desc: "Investi una volta e guarda il tuo Bitcoin moltiplicarsi senza lavoro extra.",
+        feature_trusted_title: "✅ Affidabile in tutto il mondo",
+        feature_trusted_desc: "Migliaia di utenti soddisfatti che crescono il loro BTC quotidianamente.",
+        footer_text: "© {year} BTCGrow. Tutti i diritti riservati."
+      },
+      ru: {
+        header_title: "🚀 Удвоьте свой Биткоин",
+        header_subtitle: "Быстрая, безопасная и гарантированная прибыль",
+        hero_title: "Начните сегодня всего с 0.0008 BTC",
+        hero_description: "Легко приумножайте свою криптовалюту. Опыт не нужен. 100% надежно.",
+        cta_1: "👉 РАСТИТЕ И ГЕНЕРИРУЙТЕ СВОЙ BTC СЕЙЧАС ⚡",
+        cta_2: "💰 ГЕНЕРИРУЙТЕ ДО 30 BTC",
+        feature_secure_title: "✅ Безопасная платформа",
+        feature_secure_desc: "Высокий уровень безопасности и зашифрованные транзакции для спокойствия.",
+        feature_passive_title: "✅ Пассивный доход",
+        feature_passive_desc: "Инвестируйте один раз и наблюдайте, как ваш Биткоин растет без дополнительной работы.",
+        feature_trusted_title: "✅ Доверие по всему миру",
+        feature_trusted_desc: "Тысячи довольных пользователей, ежедневно увеличивающих свой BTC.",
+        footer_text: "© {year} BTCGrow. Все права защищены."
+      },
+      ja: {
+        header_title: "🚀 ビットコインを倍増しよう",
+        header_subtitle: "速く、安全、保証されたリターン",
+        hero_title: "わずか0.0008 BTCから今日始めよう",
+        hero_description: "簡単に暗号通貨を増やせます。経験不要。100％信頼されています。",
+        cta_1: "👉 今すぐBTCを増やして生成しよう ⚡",
+        cta_2: "💰 最大30 BTCを生成",
+        feature_secure_title: "✅ 安全なプラットフォーム",
+        feature_secure_desc: "最高レベルのセキュリティと暗号化された取引で安心。",
+        feature_passive_title: "✅ 受動的収益",
+        feature_passive_desc: "一度投資すれば、追加の作業なしでビットコインが増えます。",
+        feature_trusted_title: "✅ 世界中で信頼されています",
+        feature_trusted_desc: "毎日BTCを増やしている何千人もの満足したユーザー。",
+        footer_text: "© {year} BTCGrow。全著作権所有。"
+      },
+      zh: {
+        header_title: "🚀 翻倍您的比特币",
+        header_subtitle: "快速、安全且有保证的回报",
+        hero_title: "从仅0.0008 BTC开始今天投资",
+        hero_description: "轻松增长您的加密货币。无需经验。100%可信赖。",
+        cta_1: "👉 立即增长并生成您的BTC ⚡",
+        cta_2: "💰 生成高达30 BTC",
+        feature_secure_title: "✅ 安全平台",
+        feature_secure_desc: "顶级安全和加密交易，确保安心。",
+        feature_passive_title: "✅ 被动收益",
+        feature_passive_desc: "一次投资，无需额外工作，观看比特币增长。",
+        feature_trusted_title: "✅ 全球信赖",
+        feature_trusted_desc: "数千满意用户每日增长其BTC。",
+        footer_text: "© {year} BTCGrow。版权所有。"
+      },
+      pt: {
+        header_title: "🚀 Dobre seu Bitcoin",
+        header_subtitle: "Retornos rápidos, seguros e garantidos",
+        hero_title: "Comece hoje com apenas 0.0008 BTC",
+        hero_description: "Multiplique seu cripto com facilidade. Nenhuma experiência necessária. 100% confiável.",
+        cta_1: "👉 CRESÇA E GERE SEU BTC AGORA ⚡",
+        cta_2: "💰 GERE ATÉ 30 BTC",
+        feature_secure_title: "✅ Plataforma segura",
+        feature_secure_desc: "Segurança de primeira linha e transações criptografadas para tranquilidade.",
+        feature_passive_title: "✅ Ganhos passivos",
+        feature_passive_desc: "Invista uma vez e veja seu Bitcoin multiplicar sem trabalho extra.",
+        feature_trusted_title: "✅ Confiável em todo o mundo",
+        feature_trusted_desc: "Milhares de usuários satisfeitos que crescem seu BTC diariamente.",
+        footer_text: "© {year} BTCGrow. Todos os direitos reservados."
+      }
     };
 
-    update("header h1", t.headerTitle);
-    update("header p", t.headerSubtitle);
-    update(".hero h2", t.heroTitle);
-    update(".hero p", t.heroText);
+    function setLanguage(lang) {
+      if (!translations[lang]) lang = 'en'; // fallback English
+      const t = translations[lang];
 
-    const buttons = document.querySelectorAll(".cta-button");
-    if (buttons.length > 1) {
-      buttons[0].innerText = t.cta1;
-      buttons[1].innerText = t.cta2;
+      document.querySelector("header h1").textContent = t.header_title;
+      document.querySelector("header p").textContent = t.header_subtitle;
+
+      const hero = document.querySelector(".hero");
+      hero.querySelector("h2").textContent = t.hero_title;
+      hero.querySelector("p").textContent = t.hero_description;
+
+      const ctas = document.querySelectorAll(".cta-button");
+      ctas[0].textContent = t.cta_1;
+      ctas[1].textContent = t.cta_2;
+
+      const features = document.querySelectorAll(".feature");
+      features[0].querySelector("h3").textContent = t.feature_secure_title;
+      features[0].querySelector("p").textContent = t.feature_secure_desc;
+
+      features[1].querySelector("h3").textContent = t.feature_passive_title;
+      features[1].querySelector("p").textContent = t.feature_passive_desc;
+
+      features[2].querySelector("h3").textContent = t.feature_trusted_title;
+      features[2].querySelector("p").textContent = t.feature_trusted_desc;
+
+      document.querySelector("footer").innerHTML = t.footer_text.replace("{year}", new Date().getFullYear()) +
+        `<br><br>
+        <a href="https://info.flagcounter.com/S8t6" target="_blank" rel="noopener">
+          <img src="https://s11.flagcounter.com/count2/S8t6/bg_0b0f1a/txt_ffffff/border_333333/columns_3/maxflags_20/viewers_1/labels_0/pageviews_0/flags_0/" alt="Flag Counter" border="0">
+        </a>`;
     }
 
-    const features = document.querySelectorAll(".feature");
-    if (features.length >= 3) {
-      features[0].querySelector("h3").innerText = t.feature1;
-      features[0].querySelector("p").innerText = t.feature1Text;
-      features[1].querySelector("h3").innerText = t.feature2;
-      features[1].querySelector("p").innerText = t.feature2Text;
-      features[2].querySelector("h3").innerText = t.feature3;
-      features[2].querySelector("p").innerText = t.feature3Text;
-    }
-  }
+    // Inicialiai anglų kalba
+    setLanguage('en');
 
-  window.addEventListener("DOMContentLoaded", () => {
-    changeLang();
-  });
-</script>
+    // Kai keičiam kalbą dropdown menu
+    document.getElementById('language-selector').addEventListener('change', (e) => {
+      setLanguage(e.target.value);
+    });
+
+    // BTC kainos atnaujinimas, kaip buvo
+    async function fetchBTCPrice() {
+      try {
+        const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,eur");
+        const data = await response.json();
+        const usd = data.bitcoin.usd.toLocaleString("en-US", {
+          style: "currency",
+          currency: "USD"
+        });
+        const eur = data.bitcoin.eur.toLocaleString("de-DE", {
+          style: "currency",
+          currency: "EUR"
+        });
+        document.getElementById("btc-price").innerHTML =
+          `💹 BTC Price: <strong>${usd}</strong> / <strong>${eur}</strong>`;
+      } catch (error) {
+        document.getElementById("btc-price").innerHTML = "⚠️ BTC price not available.";
+      }
+    }
+
+    fetchBTCPrice();
+    setInterval(fetchBTCPrice, 60000);
+
+    // Metų įterpimas footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+  </script>
 </body>
 </html>
