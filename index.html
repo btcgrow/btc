@@ -273,6 +273,12 @@
       <a href="https://www.btcgenerator.one/" class="cta-button" target="_blank">💰 GENERATE UP TO 30 BTC</a>
     </div>
   </section>
+  
+  
+
+  
+  
+  
 
   <!-- Naujas papildomas turinys po hero -->
   <section class="additional-content">
@@ -303,6 +309,37 @@
     <h2 id="additional-title-2"></h2>
     <p id="additional-desc-2"></p>
   </section>
+  
+  
+  <!--hero visitor counter online-->
+  <div id="online-visitors" style="color:#00ff99; font-size:1.1rem; margin-top:10px; text-align: center;">
+  Visitors Online Now: <span id="visitor-count">Loading...</span>
+</div>
+
+<script src="https://widget.trafic.digital/visitor-counter.js"></script>
+<script>
+  // Pvz., naudojame trečios šalies API (čia hipotetinis pavyzdys)
+  async function fetchVisitors() {
+    try {
+      // Čia reikėtų savo realaus laiko API URL arba naudoti serviso embed
+      // Šitas pavyzdys - fiksuotas skaičius, pakeisk su realiu API
+      const visitorsNow = Math.floor(Math.random() * 10) + 1; 
+      document.getElementById('visitor-count').textContent = visitorsNow;
+    } catch {
+      document.getElementById('visitor-count').textContent = 'N/A';
+    }
+  }
+  fetchVisitors();
+  setInterval(fetchVisitors, 30000); // atnaujina kas 30 sek.
+</script>
+
+
+
+<center>
+ <!-- Elfsight Visitor Counter | Untitled Visitor Counter -->
+
+  </center>
+  
 
   <footer>
     &copy; <span id="year"></span> BTCGrow. All rights reserved.<br><br>
