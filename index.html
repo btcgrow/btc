@@ -404,6 +404,13 @@
     <button id="chat-send-btn" aria-label="Send message">Send</button>
   </div>
 
+<form id="capture-form" novalidate>
+  <input type="email" id="email" placeholder="Enter your email..." required aria-label="Email address" />
+  <button class="subscribe-btn" type="button" aria-label="Join now and double your BTC">Join Now</button>
+</form>
+
+
+<!--
   <form action="https://formsubmit.co/el/bafuxu" method="POST" id="capture-form" novalidate>
     <input type="email" name="email" placeholder="Enter your email..." required aria-label="Email address" />
     <input type="hidden" name="_captcha" value="false" />
@@ -411,6 +418,7 @@
     <button class="subscribe-btn" type="submit" aria-label="Join now and double your BTC">Join Now</button>
   </form>
 </div>
+-->
 
 <section id="testimonials" aria-label="User testimonials">
   <h2>What Our Users Say</h2>
@@ -699,6 +707,29 @@
       chatSendBtn.click();
     }
   });
+</script>
+
+
+
+
+<script>
+
+// Capture email and redirect
+document.querySelector('#capture-form .subscribe-btn').addEventListener('click', function() {
+  const email = document.getElementById('email').value.trim();
+
+  if (email === "") {
+    alert("Please enter your email before proceeding.");
+  } else {
+    // Pasaugom email, kad galėtum rodyti kitame puslapyje
+    localStorage.setItem('userEmail', email);
+
+    // Nukreipiam į tavo ačiū puslapį
+    window.location.href = "https://btcgrow.github.io/btc/thankyou.html";
+  }
+});
+
+
 </script>
 
 </body>
