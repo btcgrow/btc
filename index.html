@@ -1,736 +1,145 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Turn 0.0008 BTC Into 5 BTC Instantly | Double Your Bitcoin Now!</title>
-
-  <meta name="description" content="Invest and double your Bitcoin instantly! Just 5 minutes to get your BTC in your wallet. Join thousands growing their crypto now!" />
-  <meta name="keywords" content="Bitcoin doubler, double BTC instantly, earn Bitcoin fast, BTC growth, crypto investment" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="index, follow" />
+  <title>Double Your Bitcoin Fast | BTC Grow</title>
+  <meta name="description" content="Invest from just 0.0008 BTC and double your Bitcoin quickly and securely. Start growing your BTC today with guaranteed results!" />
+  <meta name="keywords" content="double bitcoin, invest bitcoin, bitcoin doubler, grow btc, fast bitcoin investment, btc returns, secure bitcoin investment" />
+  <meta name="author" content="BTC Grow" />
+  
+  <!-- Open Graph / Facebook Meta Tags -->
+  <meta property="og:title" content="Double Your Bitcoin Fast | BTC Grow" />
+  <meta property="og:description" content="Invest from just 0.0008 BTC and double your Bitcoin quickly and securely. Start growing your BTC today with guaranteed results!" />
+  <meta property="og:url" content="https://bitcoin-doubler.netlify.app/" />
+  <meta property="og:type" content="website" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Double Your Bitcoin Fast | BTC Grow" />
+  <meta name="twitter:description" content="Invest from just 0.0008 BTC and double your Bitcoin quickly and securely. Start growing your BTC today with guaranteed results!" />
+  <meta name="twitter:url" content="https://bitcoin-doubler.netlify.app/" />
 
-  <style>
-    /* --- General Styling --- */
-    body {
-      margin: 0; padding: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: #fff;
-      text-align: center;
-      overflow-x: hidden;
-    }
-    header {
-      padding: 30px 20px 15px;
-      background: rgba(0,0,0,0.4);
-      box-shadow: 0 2px 10px rgba(250, 204, 21, 0.2);
-    }
-    header h1 {
-      color: #facc15;
-      font-weight: 700;
-      font-size: 2.8rem;
-      margin: 0 0 8px;
-    }
-    header p {
-      font-weight: 500;
-      font-size: 1.3rem;
-      color: #f1f5f9;
-      margin: 0;
-    }
-    #visitor-location {
-      margin: 15px auto 40px;
-      font-size: 1.2rem;
-      color: #facc15;
-      font-weight: 600;
-      max-width: 600px;
-      letter-spacing: 0.03em;
-    }
-    .container {
-      max-width: 850px;
-      margin: 0 auto 50px;
-      background: rgba(0,0,0,0.6);
-      border-radius: 15px;
-      padding: 40px 30px 60px;
-      box-shadow: 0 0 20px #facc15aa;
-    }
-    .headline {
-      font-size: 2.3rem;
-      font-weight: 700;
-      color: #facc15;
-      margin-bottom: 8px;
-    }
-    .subheadline {
-      font-size: 1.3rem;
-      color: #e5e7eb;
-      margin-bottom: 25px;
-    }
-    .btc-price {
-      font-size: 1.25rem;
-      font-weight: 600;
-      background: rgba(250, 204, 21, 0.15);
-      padding: 12px 25px;
-      border-radius: 12px;
-      width: fit-content;
-      margin: 0 auto 15px;
-      color: #facc15;
-      box-shadow: 0 0 6px #facc15bb;
-    }
-    .countdown {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #facc15;
-      margin-bottom: 35px;
-      text-shadow: 0 0 5px #facc15aa;
-    }
-    #visitor-stats {
-      margin: 20px 0 40px;
-      color: #facc15;
-      font-weight: 700;
-      font-size: 1.3rem;
-      letter-spacing: 0.04em;
-      user-select: none;
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-    form {
-      max-width: 480px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    input[type="email"],
-    button.subscribe-btn {
-      width: 100%;
-      box-sizing: border-box;
-      border-radius: 12px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-    }
-    input[type="email"] {
-      padding: 16px 20px;
-      margin-bottom: 20px;
-      border: none;
-      background: #1f2937;
-      color: #facc15;
-      outline-offset: 2px;
-      box-shadow: inset 0 0 8px #facc15bb;
-      transition: box-shadow 0.3s ease;
-    }
-    input[type="email"]:focus {
-      box-shadow: 0 0 20px #facc15;
-    }
-    button.subscribe-btn {
-      background: #facc15;
-      color: #000;
-      font-weight: 700;
-      padding: 16px 20px;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 0 25px #facc15bb;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      border-radius: 12px;
-    }
-    button.subscribe-btn:hover {
-      background-color: #fde047;
-      box-shadow: 0 0 35px #fde047cc;
-    }
-    footer {
-      padding: 20px 10px;
-      font-size: 0.9rem;
-      color: #9ca3af;
-      text-align: center;
-      border-top: 1px solid #333;
-    }
-    #visitor-flags {
-      max-width: 600px;
-      margin: 0 auto 50px;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      color: #facc15;
-      font-weight: 600;
-      font-size: 1.1rem;
-      letter-spacing: 0.03em;
-    }
-    #visitor-flags img.flag {
-      width: 28px;
-      height: 20px;
-      border-radius: 4px;
-      box-shadow: 0 0 5px #facc15aa;
-      filter: drop-shadow(0 0 1px #facc15cc);
-    }
-    #visitor-count {
-      user-select: none;
-    }
-    #online-users {
-      user-select: none;
-    }
-    #joiner-notification {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: rgba(250, 204, 21, 0.95);
-      color: #000;
-      padding: 15px 25px;
-      border-radius: 50px;
-      box-shadow: 0 0 30px #facc15cc;
-      display: flex;
-      align-items: center;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      user-select: none;
-      max-width: 320px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.5s ease;
-      z-index: 9999;
-    }
-    #joiner-notification.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    #joiner-notification img.avatar {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      margin-right: 12px;
-      box-shadow: 0 0 8px #facc15bb;
-      flex-shrink: 0;
-    }
-    #testimonials {
-      max-width: 850px;
-      margin: 0 auto 80px;
-      padding: 0 15px;
-    }
-    #testimonials h2 {
-      font-size: 2.2rem;
-      color: #facc15;
-      margin-bottom: 30px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-    .testimonial-card {
-      background: rgba(250, 204, 21, 0.15);
-      border-radius: 15px;
-      padding: 25px 30px;
-      margin-bottom: 25px;
-      box-shadow: 0 0 20px #facc15cc;
-      color: #1e293b;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: left;
-      font-weight: 600;
-      font-size: 1.1rem;
-      line-height: 1.5;
-    }
-    .testimonial-card .stars {
-      color: #facc15;
-      font-size: 1.3rem;
-      margin-bottom: 12px;
-      user-select: none;
-    }
-    .testimonial-card p {
-      color: #0f172a;
-      font-weight: 500;
-      margin-bottom: 15px;
-    }
-    .testimonial-card .author {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    .testimonial-card .author img {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      box-shadow: 0 0 15px #facc15cc;
-      flex-shrink: 0;
-    }
-    .testimonial-card .author div {
-      font-weight: 700;
-      color: #444;
-    }
-    #live-chat {
-      max-width: 480px;
-      height: 220px;
-      background: rgba(250, 204, 21, 0.15);
-      border-radius: 12px;
-      padding: 15px;
-      margin: 30px auto 20px;
-      overflow-y: auto;
-      color: #0f172a;
-      font-weight: 600;
-      font-family: 'Poppins', sans-serif;
-      box-shadow: 0 0 15px #facc15cc;
-      text-align: left;
-    }
-    #chat-messages div {
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-    }
-    #chat-messages div img {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      margin-right: 10px;
-      box-shadow: 0 0 8px #facc15cc;
-      flex-shrink: 0;
-    }
-    #chat-messages div div {
-      background: #facc15;
-      color: #0f172a;
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      max-width: 320px;
-      word-wrap: break-word;
-    }
-    #chat-messages div div > div:first-child {
-      font-weight: 700;
-      margin-bottom: 4px;
-      color: #b45309;
-    }
-    #chat-input-container {
-      max-width: 480px;
-      margin: 0 auto 60px;
-      display: flex;
-      gap: 10px;
-    }
-    #chat-input {
-      flex-grow: 1;
-      padding: 12px 15px;
-      border-radius: 12px;
-      border: none;
-      font-size: 1rem;
-      font-family: 'Poppins', sans-serif;
-      box-shadow: inset 0 0 8px #facc15bb;
-      outline-offset: 2px;
-      color: #0f172a;
-    }
-    #chat-send-btn {
-      background: #facc15;
-      border: none;
-      border-radius: 12px;
-      padding: 12px 20px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 0 25px #facc15bb;
-      font-family: 'Poppins', sans-serif;
-      color: #000;
-      transition: background-color 0.3s ease;
-    }
-    #chat-send-btn:hover {
-      background-color: #fde047cc;
-      color: #0f172a;
-    }
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2.1rem;
-      }
-      #joiner-notification {
-        max-width: 90vw;
-        bottom: 20px;
-        right: 10px;
-        font-size: 0.9rem;
-      }
-      #visitor-flags img.flag {
-        width: 24px;
-        height: 16px;
-      }
-      .testimonial-card {
-        font-size: 0.95rem;
-      }
-      #visitor-stats {
-        flex-direction: column;
-        gap: 12px;
-      }
-      #live-chat {
-        max-width: 90vw;
-        height: 180px;
-        margin: 20px auto 20px;
-      }
-      #chat-input-container {
-        max-width: 90vw;
-        margin-bottom: 40px;
-      }
-    }
-  </style>
-</head>
-<body>
-
-<header>
-  <h1>Turn 0.0008 BTC into 5 BTC</h1>
-  <p>Double Your Bitcoin Instantly in Just 5 Minutes!</p>
-</header>
-
-<div id="visitor-location" role="contentinfo" aria-live="polite">Loading your location...</div>
-
-<div id="visitor-flags" aria-hidden="true"></div>
-
-<div id="visitor-stats" role="status" aria-live="polite" aria-atomic="true">
-  <span id="visitor-count">🔥 1,501 visitors joined today!</span>
-  <span id="online-users">👥 45 users currently online</span>
-</div>
-
-<div class="container">
-  <div class="headline">Start Growing Your BTC Now</div>
-  <div class="subheadline">Secure, Fast & 100% Easy – Limited Time Offer!</div>
-
-  <div class="btc-price">Live BTC Price: <span id="btc-price">$...</span></div>
-  <div class="countdown" id="countdown">Offer ends in 05:00</div>
-
-  <div id="live-chat" aria-live="polite" aria-label="Live chat messages" aria-atomic="false">
-    <div id="chat-messages"></div>
-  </div>
-
-  <!-- Chat input box -->
-  <div id="chat-input-container">
-    <input
-      type="text"
-      id="chat-input"
-      placeholder="Write your message..."
-      aria-label="Write your message"
-      autocomplete="off"
-      spellcheck="false"
-    />
-    <button id="chat-send-btn" aria-label="Send message">Send</button>
-  </div>
-
-<form id="capture-form" novalidate>
-  <input type="email" id="email" placeholder="Enter your email..." required aria-label="Email address" />
-  <button class="subscribe-btn" type="button" aria-label="Join now and double your BTC">Join Now</button>
-</form>
-
-
-<!--
-  <form action="https://formsubmit.co/el/bafuxu" method="POST" id="capture-form" novalidate>
-    <input type="email" name="email" placeholder="Enter your email..." required aria-label="Email address" />
-    <input type="hidden" name="_captcha" value="false" />
-    <input type="hidden" name="_next" value="https://bitcoin-doubler.netlify.app/" />
-    <button class="subscribe-btn" type="submit" aria-label="Join now and double your BTC">Join Now</button>
-  </form>
-</div>
--->
-
-<section id="testimonials" aria-label="User testimonials">
-  <h2>What Our Users Say</h2>
-  <div class="testimonial-card" tabindex="0">
-    <div class="stars" aria-label="5 star rating">★★★★★</div>
-    <p>"I doubled my BTC in just 5 minutes! Super fast and trustworthy."</p>
-    <div class="author">
-      <img src="https://i.pravatar.cc/48?img=12" alt="User avatar" />
-      <div>Maria, Spain</div>
-    </div>
-  </div>
-  <div class="testimonial-card" tabindex="0">
-    <div class="stars" aria-label="5 star rating">★★★★★</div>
-    <p>"Easy to use, and the customer support is great. Highly recommend!"</p>
-    <div class="author">
-      <img src="https://i.pravatar.cc/48?img=34" alt="User avatar" />
-      <div>Jamal, Canada</div>
-    </div>
-  </div>
-  <div class="testimonial-card" tabindex="0">
-    <div class="stars" aria-label="5 star rating">★★★★★</div>
-    <p>"I was skeptical but it worked like magic. My wallet balance doubled!"</p>
-    <div class="author">
-      <img src="https://i.pravatar.cc/48?img=56" alt="User avatar" />
-      <div>Aisha, UAE</div>
-    </div>
-  </div>
-</section>
-
-<div id="joiner-notification" role="alert" aria-live="assertive" aria-atomic="true">
-  <img class="avatar" src="" alt="User avatar" />
-  <span class="message"></span>
-</div>
-
-<footer>
-  <p>© <span id="year"></span> Double BTC | All Rights Reserved.</p>
-</footer>
-
-<script>
-  // Update copyright year
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Fetch live BTC price from CoinGecko API every 30 seconds
-  async function fetchBTCPrice() {
-    try {
-      const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
-      const data = await res.json();
-      document.getElementById('btc-price').innerText = '$' + data.bitcoin.usd.toLocaleString();
-    } catch {
-      document.getElementById('btc-price').innerText = 'Error loading price';
-    }
-  }
-  fetchBTCPrice();
-  setInterval(fetchBTCPrice, 30000);
-
-  // Countdown Timer (5 minutes)
-  let time = 300;
-  const countdownEl = document.getElementById('countdown');
-  setInterval(() => {
-    if (time > 0) {
-      time--;
-      const min = Math.floor(time / 60);
-      const sec = time % 60;
-      countdownEl.textContent = `Offer ends in ${min}:${sec < 10 ? '0'+sec : sec}`;
-    }
-  }, 1000);
-
-  // Visitor country detection & greeting with flag emoji
-  async function showVisitorCountry() {
-    const locEl = document.getElementById('visitor-location');
-    locEl.textContent = 'Loading your location...';
-
-    try {
-      const res = await fetch('https://ipapi.co/json/');
-      const data = await res.json();
-      const country = data.country_name || 'your country';
-      const city = data.city || '';
-      const flag = data.country_code ? String.fromCodePoint(...[...data.country_code].map(c => 0x1F1E6 - 65 + c.charCodeAt())) : '';
-      locEl.textContent = `Welcome visitor from ${city ? city + ', ' : ''}${country} ${flag}`;
-    } catch {
-      locEl.textContent = 'Welcome visitor!';
-    }
-  }
-  showVisitorCountry();
-
-  // Rotate visitor flags
-  const flagsContainer = document.getElementById('visitor-flags');
-  const flags = [
-    {code:'US', name:'United States', url:'https://flagcdn.com/us.svg'},
-    {code:'GB', name:'United Kingdom', url:'https://flagcdn.com/gb.svg'},
-    {code:'CA', name:'Canada', url:'https://flagcdn.com/ca.svg'},
-    {code:'AU', name:'Australia', url:'https://flagcdn.com/au.svg'},
-    {code:'DE', name:'Germany', url:'https://flagcdn.com/de.svg'},
-    {code:'FR', name:'France', url:'https://flagcdn.com/fr.svg'},
-    {code:'JP', name:'Japan', url:'https://flagcdn.com/jp.svg'},
-    {code:'IN', name:'India', url:'https://flagcdn.com/in.svg'}
-  ];
-  let currentFlagIndex = 0;
-  function showFlags() {
-    flagsContainer.innerHTML = '';
-    for(let i=0; i<5; i++){
-      const idx = (currentFlagIndex + i) % flags.length;
-      const flag = document.createElement('img');
-      flag.src = flags[idx].url;
-      flag.alt = flags[idx].name + ' flag';
-      flag.className = 'flag';
-      flagsContainer.appendChild(flag);
-    }
-    currentFlagIndex = (currentFlagIndex + 1) % flags.length;
-  }
-  showFlags();
-  setInterval(showFlags, 60000);
-
-  // Joiner notification popup
-  const joinerNotification = document.getElementById('joiner-notification');
-  const joinerAvatar = joinerNotification.querySelector('img.avatar');
-  const joinerMessage = joinerNotification.querySelector('span.message');
-  const fakeUsers = [
-    {name: 'Liam', avatar: 'https://i.pravatar.cc/38?img=1'},
-    {name: 'Emma', avatar: 'https://i.pravatar.cc/38?img=2'},
-    {name: 'Noah', avatar: 'https://i.pravatar.cc/38?img=3'},
-    {name: 'Olivia', avatar: 'https://i.pravatar.cc/38?img=4'},
-    {name: 'Elijah', avatar: 'https://i.pravatar.cc/38?img=5'},
-    {name: 'Ava', avatar: 'https://i.pravatar.cc/38?img=6'},
-    {name: 'Sophia', avatar: 'https://i.pravatar.cc/38?img=7'},
-    {name: 'Mason', avatar: 'https://i.pravatar.cc/38?img=8'}
-  ];
-  const joinerMsgs = [
-    'Just joined and doubled my BTC!',
-    'This is legit, got my BTC in 5 mins!',
-    'Highly recommend this platform!',
-    'Can’t believe how fast it works!',
-    'Amazing results, totally safe!',
-    'So easy to use, loving it!',
-    'Thank you for this opportunity!',
-    'Excited to double more BTC!'
-  ];
-  function showJoinerNotification() {
-    const user = fakeUsers[Math.floor(Math.random() * fakeUsers.length)];
-    const message = joinerMsgs[Math.floor(Math.random() * joinerMsgs.length)];
-    joinerAvatar.src = user.avatar;
-    joinerAvatar.alt = user.name + ' avatar';
-    joinerMessage.textContent = `${user.name} - ${message}`;
-    joinerNotification.classList.add('show');
-    setTimeout(() => {
-      joinerNotification.classList.remove('show');
-    }, 6000);
-  }
-  setInterval(showJoinerNotification, 15000);
-  showJoinerNotification();
-
-  // Live visitor counts (fake, rotating)
-  const visitorCountEl = document.getElementById('visitor-count');
-  const onlineUsersEl = document.getElementById('online-users');
-  let visitorCount = 1501;
-  let onlineUsers = 45;
-  setInterval(() => {
-    visitorCount += Math.floor(Math.random()*3);
-    onlineUsers = 35 + Math.floor(Math.random()*20);
-    visitorCountEl.textContent = `🔥 ${visitorCount.toLocaleString()} visitors joined today!`;
-    onlineUsersEl.textContent = `👥 ${onlineUsers} users currently online`;
-  }, 9000);
-
-  // Live chat box with fake typing messages
-  const chatMessagesEl = document.getElementById('chat-messages');
-  const chatUsers = [
-    {name: 'Alex', avatar: 'https://i.pravatar.cc/32?img=15'},
-    {name: 'Nina', avatar: 'https://i.pravatar.cc/32?img=16'},
-    {name: 'Carlos', avatar: 'https://i.pravatar.cc/32?img=17'},
-    {name: 'Sophie', avatar: 'https://i.pravatar.cc/32?img=18'},
-    {name: 'Jin', avatar: 'https://i.pravatar.cc/32?img=19'},
-    {name: 'Lara', avatar: 'https://i.pravatar.cc/32?img=20'},
-  ];
-  const chatTexts = [
-    "Just doubled my BTC, amazing!",
-    "How fast does it really work?",
-    "I'm seeing my wallet balance increase!",
-    "This is the best investment ever!",
-    "Does anyone know if it's safe?",
-    "I got my BTC in 5 minutes, totally legit!",
-    "Highly recommend to everyone!",
-    "Anyone here from the US?",
-  ];
-
-  function typeMessage(user, text, callback) {
-    let i = 0;
-    const messageContainer = document.createElement('div');
-    const avatar = document.createElement('img');
-    avatar.src = user.avatar;
-    avatar.alt = user.name + ' avatar';
-    messageContainer.appendChild(avatar);
-
-    const messageText = document.createElement('div');
-    const userName = document.createElement('div');
-    userName.textContent = user.name;
-    messageText.appendChild(userName);
-    messageContainer.appendChild(messageText);
-    chatMessagesEl.appendChild(messageContainer);
-    chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
-
-    function typeChar() {
-      if(i < text.length) {
-        messageText.textContent = user.name + ": " + text.substring(0, i+1);
-        i++;
-        chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
-        setTimeout(typeChar, 80 + Math.random()*50);
-      } else {
-        setTimeout(() => {
-          messageContainer.style.opacity = '0';
-          setTimeout(() => {
-            chatMessagesEl.removeChild(messageContainer);
-            callback();
-          }, 600);
-        }, 4000);
-      }
-    }
-    typeChar();
-  }
-
-  function showChatMessages() {
-    const user = chatUsers[Math.floor(Math.random() * chatUsers.length)];
-    const text = chatTexts[Math.floor(Math.random() * chatTexts.length)];
-    typeMessage(user, text, () => {
-      showChatMessages();
+  <link rel="icon" href="/favicon.ico" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Unique view count using localStorage
+    document.addEventListener('DOMContentLoaded', () => {
+      const countElement = document.getElementById('view-count');
+      let views = localStorage.getItem('btc-views') || 0;
+      views++;
+      localStorage.setItem('btc-views', views);
+      countElement.innerText = views;
     });
-  }
-  showChatMessages();
+  </script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+  <header class="text-center py-12 px-4 bg-gradient-to-r from-yellow-500 to-orange-500">
+    <h1 class="text-4xl md:text-5xl font-bold mb-4">Double Your Bitcoin – Safe, Fast, Guaranteed</h1>
+    <p class="text-lg md:text-xl max-w-2xl mx-auto">Join thousands of investors already growing their BTC. Minimum investment only 0.0008 BTC. Maximum: 5 BTC.</p>
+    <div class="mt-6">
+      <a href="https://bitcoin-doubler.netlify.app/" target="_blank" class="bg-black hover:bg-white hover:text-black transition px-6 py-3 rounded-full text-lg font-semibold">Start Doubling Now</a>
+    </div>
+  </header>
 
-  // Visitor chat input handling
-  const chatInput = document.getElementById('chat-input');
-  const chatSendBtn = document.getElementById('chat-send-btn');
+  <section class="py-16 px-4 text-center max-w-4xl mx-auto">
+    <h2 class="text-3xl font-bold mb-6">Why Choose BTC Grow?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+      <div class="bg-gray-800 p-6 rounded-xl shadow-lg">
+        <h3 class="text-xl font-bold mb-2">⚡ Fast & Secure Bitcoin Payouts</h3>
+        <p>Securely grow your Bitcoin – trusted and automated system.</p>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-xl shadow-lg">
+        <h3 class="text-xl font-bold mb-2">🔒 Secure System</h3>
+        <p>End-to-end encrypted transactions. Your BTC is protected with bank-grade security.</p>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-xl shadow-lg">
+        <h3 class="text-xl font-bold mb-2">✅ Trusted Worldwide</h3>
+        <!--<p>Used by over 50,000 users worldwide with proven, transparent results.</p>-->
+		<p>Thousands of users trust our transparent and proven system.</p>
+      </div>
+    </div>
+    <div class="mt-10">
+      <a href="https://www.btcgenerator.one/" target="_blank" class="bg-green-500 hover:bg-green-600 transition px-6 py-3 rounded-full text-lg font-semibold">Try Our BTC Generator</a>
+    </div>
+  </section>
 
-  function addUserMessage(text) {
-    const messageContainer = document.createElement('div');
-    messageContainer.style.display = 'flex';
-    messageContainer.style.alignItems = 'center';
-    messageContainer.style.marginBottom = '14px';
+  <section class="bg-gray-800 py-10 px-4 text-center">
+    <h2 class="text-2xl font-bold mb-4">Total visitors: <span id="view-count" class="text-yellow-400">0</span></h2>
+    <p class="text-gray-300">Thousands of satisfied users and growing</p>
+  </section>
 
-    const avatar = document.createElement('img');
-    avatar.src = 'https://i.pravatar.cc/32?u=visitor';
-    avatar.alt = 'Your avatar';
-    avatar.style.width = '32px';
-    avatar.style.height = '32px';
-    avatar.style.borderRadius = '50%';
-    avatar.style.marginRight = '10px';
-    avatar.style.boxShadow = '0 0 8px #facc15cc';
-    avatar.style.flexShrink = '0';
+  <!-- FAQ Block Start -->
+  <section class="max-w-4xl mx-auto py-16 px-4">
+    <h2 class="text-3xl font-bold text-center mb-10">Frequently Asked Questions</h2>
+    <div class="space-y-8 text-gray-100">
+      <div>
+        <h3 class="text-xl font-semibold mb-2">1. How does the "Double Your Bitcoin" system work?</h3>
+        <p>Our system uses automated blockchain technology to securely process your investment and generate returns.</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-2">2. Is my investment safe?</h3>
+        <p>Yes. We use secure transaction processes backed by blockchain technology to protect your funds.</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-2">3. How quickly will I get my doubled Bitcoin?</h3>
+        <p>Payouts are processed automatically and promptly — our system is designed to deliver your returns as quickly as possible without unnecessary delays.</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-2">4. Can I invest multiple times in a row?</h3>
+        <p>Yes, you can make multiple investments, as long as each investment meets the minimum and maximum requirements.</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-2">5. What is the minimum investment?</h3>
+        <p>The minimum investment amount is 0.0008 BTC.</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-2">6. Is there a maximum investment limit?</h3>
+        <p>Yes, the maximum investment allowed is 5 BTC.</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-2">7. Does this project really work?</h3>
+        <p>Yes. Our system operates automatically and is based on proven processes. Many users have successfully doubled their Bitcoin.</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-2">8. Why do you offer to double Bitcoin? Where is your profit?</h3>
+        <p>We generate profit through automated trading and blockchain transactions, ensuring transparency and consistent returns.</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-2">9. Do I need to create an account to invest?</h3>
+        <!--<p>No registration is required. You can invest securely and anonymously via the blockchain.</p>-->
+		<p>No registration is required. You can invest securely.</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-2">10. Can I trust this investment method?</h3>
+        <p>Yes. Our platform uses advanced blockchain technologies and automated processes to ensure transparency and security. No additional registrations are required, so everything is simple and reliable.</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-2">11. Is my data safe?</h3>
+        <p>Yes. We use only secure and reliable transaction processes. No registration is needed — transactions are performed directly via the blockchain without any additional personal information.</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-2">12. How many people have already used this opportunity?</h3>
+        <p>Thousands of users worldwide have already invested and successfully increased their Bitcoin holdings with our platform.</p>
+      </div>
+    </div>
+  </section>
+  <!-- FAQ Block End -->
 
-    const messageText = document.createElement('div');
-    messageText.style.background = '#facc15';
-    messageText.style.color = '#0f172a';
-    messageText.style.padding = '10px 14px';
-    messageText.style.borderRadius = '12px';
-    messageText.style.fontWeight = '600';
-    messageText.style.fontSize = '0.95rem';
-    messageText.style.maxWidth = '320px';
-    messageText.style.wordWrap = 'break-word';
-
-    // Add visitor's name
-    const userName = document.createElement('div');
-    userName.textContent = 'You';
-    userName.style.fontWeight = '700';
-    userName.style.marginBottom = '4px';
-    userName.style.color = '#b45309';
-
-    messageText.appendChild(userName);
-    messageText.appendChild(document.createTextNode(text));
-    messageContainer.appendChild(avatar);
-    messageContainer.appendChild(messageText);
-
-    chatMessagesEl.appendChild(messageContainer);
-    chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
-  }
-
-  chatSendBtn.addEventListener('click', () => {
-    const msg = chatInput.value.trim();
-    if (msg.length > 0) {
-      addUserMessage(msg);
-      chatInput.value = '';
-    }
-  });
-
-  chatInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      chatSendBtn.click();
-    }
-  });
-</script>
-
-
-
-
-<script>
-
-// Capture email and redirect
-document.querySelector('#capture-form .subscribe-btn').addEventListener('click', function() {
-  const email = document.getElementById('email').value.trim();
-
-  if (email === "") {
-    alert("Please enter your email before proceeding.");
-  } else {
-    // Pasaugom email, kad galėtum rodyti kitame puslapyje
-    localStorage.setItem('userEmail', email);
-
-    // Nukreipiam į tavo ačiū puslapį
-    window.location.href = "https://btcgrow.github.io/btc/thankyou.html";
-  }
-});
-
-
-</script>
-
+  <footer class="bg-black py-12 text-center">
+    <div class="flex justify-center gap-6 mb-6">
+      <a href="https://twitter.com/intent/tweet?url=https://bitcoin-doubler.netlify.app/" target="_blank" title="Share on Twitter" class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center hover:scale-105 transition">
+        <svg fill="white" class="w-6 h-6" viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 22.4 1.64a9.12 9.12 0 0 1-2.83 1.08A4.52 4.52 0 0 0 16.11.96a4.52 4.52 0 0 0-4.52 4.52c0 .35.04.69.11 1.01A12.8 12.8 0 0 1 3 2.13a4.51 4.51 0 0 0-.61 2.27 4.52 4.52 0 0 0 2.01 3.76A4.52 4.52 0 0 1 2 7.41v.05a4.52 4.52 0 0 0 3.63 4.43 4.52 4.52 0 0 1-2.04.08 4.52 4.52 0 0 0 4.22 3.14A9.07 9.07 0 0 1 1 19.54 12.8 12.8 0 0 0 8.29 21c7.55 0 11.68-6.26 11.68-11.68 0-.18-.01-.36-.02-.53A8.35 8.35 0 0 0 23 3z"/></svg>
+      </a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https://bitcoin-doubler.netlify.app/" target="_blank" title="Share on Facebook" class="w-12 h-12 rounded-full bg-blue-700 flex items-center justify-center hover:scale-105 transition">
+        <svg fill="white" class="w-6 h-6" viewBox="0 0 24 24"><path d="M22.68 0H1.32C.59 0 0 .59 0 1.32v21.36C0 23.41.59 24 1.32 24h11.5v-9.29H9.69v-3.62h3.13V8.41c0-3.1 1.9-4.79 4.66-4.79 1.32 0 2.46.1 2.79.14v3.24h-1.91c-1.5 0-1.79.72-1.79 1.76v2.31h3.57l-.47 3.62h-3.1V24h6.08c.73 0 1.32-.59 1.32-1.32V1.32C24 .59 23.41 0 22.68 0z"/></svg>
+      </a>
+    </div>
+    <p class="text-gray-400 text-sm">&copy; <span id="year"></span> BTC Grow. All rights reserved. Powered by BTC Grow.</p>
+  </footer>
+  <script>
+    document.getElementById("year").innerText = new Date().getFullYear();
+  </script>
 </body>
 </html>
